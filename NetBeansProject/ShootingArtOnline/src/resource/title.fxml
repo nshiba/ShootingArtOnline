@@ -8,14 +8,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="game.TitleController">
   <children>
-    <Pane layoutX="0.0" layoutY="0.0" prefHeight="800.0" prefWidth="1280.0">
-      <children>
-        <HBox layoutX="0.0" layoutY="0.0" prefHeight="49.0" prefWidth="444.0">
-          <children>
-            <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" text="test" />
-          </children>
-        </HBox>
-      </children>
-    </Pane>
+    <Pane layoutX="0.0" layoutY="0.0" prefHeight="800.0" prefWidth="1280.0" />
   </children>
 </AnchorPane>
