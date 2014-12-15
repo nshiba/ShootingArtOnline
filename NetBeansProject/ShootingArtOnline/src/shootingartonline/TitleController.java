@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package game;
+package shootingartonline;
 
 import java.net.URL;
 import java.util.ResourceBundle;
