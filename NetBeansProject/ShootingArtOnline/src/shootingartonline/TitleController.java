@@ -6,9 +6,16 @@
 
 package shootingartonline;
 
+import game.Game;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -16,6 +23,12 @@ import javafx.fxml.Initializable;
  * @author snake00
  */
 public class TitleController implements Initializable {
+	@FXML
+	private Button testButton;
+	@FXML
+	public Pane gamePanel;
+	
+	private Game game;
 
 	/**
 	 * Initializes the controller class.
@@ -23,6 +36,22 @@ public class TitleController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
+		game = new Game(gamePanel);
 	}	
+
+	@FXML
+	private void testOnAction(ActionEvent event) {
+		
+		game.start(game);
+		System.out.println("game start!!");
+	}
+
+	@FXML
+	private void getMouseLocate(MouseEvent event) {
+	}
+
+	@FXML
+	private void keyAction(KeyEvent event) {
+	}
 	
 }
