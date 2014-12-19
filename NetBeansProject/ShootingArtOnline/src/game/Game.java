@@ -11,6 +11,7 @@ import static game.Global.FrameCount;
 import static game.Global.enemyBullet;
 import static game.Global.playerBullet;
 import javafx.concurrent.Task;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 
 /**
@@ -21,13 +22,13 @@ public class Game extends Task implements Runnable {
 
 	Player player;
 	Enemy enemy;
-	Pane pane;
+	Canvas pane;
 	boolean TitleFlag = false;
 	boolean GameFlag = true;
 	boolean OptionFlag = false;
 	boolean SelectFlag = false;
 
-	public Game(Pane pane) {
+	public Game(Canvas pane) {
 		this.pane = pane;
 
 	}
@@ -39,7 +40,7 @@ public class Game extends Task implements Runnable {
 
 	@Override
 	public void run() {
-		while (TitleFlag == true) {
+		while (true) {
 			if (GameFlag) {
 				Game();
 			}
@@ -61,7 +62,7 @@ public class Game extends Task implements Runnable {
 	private void setUpGame() {
 		FrameCount = 0;
 
-		player = new Player();
+		player = new Player(100,200);
 		enemy = new Enemy();
 
 		playerBullet = new Bullet[PlayerBulletCount];
@@ -80,6 +81,8 @@ public class Game extends Task implements Runnable {
 	}
 
 	private void Game() {
+		player.update();
+		player.draw(pane);
 
 	}
 

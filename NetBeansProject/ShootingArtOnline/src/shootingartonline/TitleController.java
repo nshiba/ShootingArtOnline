@@ -7,11 +7,15 @@
 package shootingartonline;
 
 import game.Game;
+import static game.Global.setMouseX;
+import static game.Global.setMouseY;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +32,8 @@ public class TitleController implements Initializable {
 	@FXML
 	public Pane gamePanel;
 	
+	public Canvas canvas;
+	
 	private Game game;
 
 	/**
@@ -36,18 +42,23 @@ public class TitleController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
-		game = new Game(gamePanel);
+		gamePanel.getChildren().add(canvas);
+		game = new Game(canvas);
+		game.start(game);
+		System.out.println("game start!!");
 	}	
 
 	@FXML
 	private void testOnAction(ActionEvent event) {
 		
-		game.start(game);
-		System.out.println("game start!!");
+		
 	}
 
 	@FXML
 	private void getMouseLocate(MouseEvent event) {
+		setMouseX(event.getSceneX());
+		setMouseY(event.getSceneY());
+		System.out.println(event.getSceneX());
 	}
 
 	@FXML
