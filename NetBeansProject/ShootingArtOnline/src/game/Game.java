@@ -10,15 +10,19 @@ import static config.GameConfig.PlayerBulletCount;
 import static game.Global.FrameCount;
 import static game.Global.enemyBullet;
 import static game.Global.playerBullet;
+import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  *
  * @author snake00
  */
-public class Game extends Task implements Runnable {
+public class Game extends Task{
 
 	Player player;
 	Enemy enemy;
@@ -27,20 +31,17 @@ public class Game extends Task implements Runnable {
 	boolean GameFlag = true;
 	boolean OptionFlag = false;
 	boolean SelectFlag = false;
+	GraphicsContext gc;
+	Timeline timeline;
 
 	public Game(Canvas pane) {
 		this.pane = pane;
+		gc = pane.getGraphicsContext2D();
 
 	}
 
-	@Override
-	protected Object call() throws Exception {
-		return null;
-	}
 
-	@Override
 	public void run() {
-		while (true) {
 			if (GameFlag) {
 				Game();
 			}
@@ -50,13 +51,26 @@ public class Game extends Task implements Runnable {
 			if (SelectFlag) {
 				//select.draw();
 			}
-		}
 
 	}
 
 	public void start(Game game) {
+		
 		setUpGame();
-		new Thread(game).start();
+		AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long time) {
+		    
+                 gc = pane.getGraphicsContext2D();
+		 gc.setFill(Color.rgb(0, 0, 0, 1.0));
+                gc.clearRect(0, 0, 1280, 800);
+		run();
+                
+                }
+        };
+        
+        timer.start();
+
 	}
 
 	private void setUpGame() {
@@ -77,13 +91,20 @@ public class Game extends Task implements Runnable {
 	}
 
 	private void bg() {
-		pane.setStyle("-fx-background-color: black");
+		
+		
+
 	}
 
-	private void Game() {
+	private void Game() {	
+		bg();
 		player.update();
-		player.draw(pane);
+		player.draw(gc);
+	}
 
+	@Override
+	protected Object call() throws Exception {
+		return null;
 	}
 
 }

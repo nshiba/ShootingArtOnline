@@ -33,12 +33,14 @@ public class Global {
 	 */
 	public static void setMouseX(double x){
 		X = (int)x;
+		System.out.println("setok");
 	}
 	/**
 	 * my machine get X
 	 */
 	public static int getX(){
 		return X;
+		
 	}
 	/**
 	 * my machine set Y
