@@ -34,12 +34,12 @@ public class Player {
 	}
 
 	public void update() {
-		if (Global.getX() < x) {
+		if (Global.getMouseX() < x) {
 			x -= vx;
 		} else {
 			x += vx;
 		}
-		if (Global.getY() < y) {
+		if (Global.getMouseY() < y) {
 			y -= vy;
 		} else {
 			y += vy;

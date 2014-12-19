@@ -11,8 +11,12 @@ package game;
  */
 public class Global {
 	
-	public static int X;
-	public static int Y;
+	public static int mouseX;
+	public static int mouseY;
+	public static int myX;
+	public static int myY;
+	public static int enemyX;
+	public static int enemyY;
 
 	/**
 	 * enemy bullet
@@ -29,29 +33,75 @@ public class Global {
 	public static int FrameCount;
 	
 	/**
-	 * my machine set X
+	 * mouse set X
+	 * @param x
 	 */
 	public static void setMouseX(double x){
-		X = (int)x;
+		mouseX = (int)x;
 		System.out.println("setok");
 	}
 	/**
-	 * my machine get X
+	 * mouse get X
+	 * @return 
 	 */
-	public static int getX(){
-		return X;
+	public static int getMouseX(){
+		return mouseX;
+	}
+	/**
+	 * my machine set X
+	 * @param myx
+	 */
+	public static void setX(int myx){
+		 myX = myx;
 		
 	}
 	/**
 	 * my machine set Y
+	 * @param y
 	 */
 	public static void setMouseY(double y){
-		Y = (int)y;
+		mouseY = (int)y;
 	}
 	/**
-	 * my machine get Y
+	 * get mouse Y
+	 * @return 
 	 */
-	public static int getY(){
-		return Y;
+	public static int getMouseY(){
+		return mouseY;
+	} 
+	/**
+	 * my machine get Y
+	 * @param myy
+	 */
+	public static void setY(int myy){
+		 myY = myy;
+	}
+	/**
+	 * set enemy X
+	 * @param enemyx
+	 */
+	public static void setEnemyX(int enemyx){
+		enemyX = enemyx;
+	}
+	/**
+	 * get enemy X
+	 * @return 
+	 */
+	public static int getEnemyX() {
+		return enemyX;
+	}
+	/**
+	 * set enemy Y
+	 * @param enemyy
+	 */
+	public static void setEnemyY(int enemyy){
+		enemyY = enemyy;
+	}
+	/**
+	 * get enemy Y
+	 * @return 
+	 */
+	public static int getEnemyY() {
+		return enemyY;
 	}
 }
