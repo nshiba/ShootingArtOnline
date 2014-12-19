@@ -20,7 +20,7 @@ public class ShootingArtOnline extends Application {
 
 	 @Override
     public void start(Stage primaryStage) throws IOException {
-	Parent root = FXMLLoader.load(getClass().getResource("/resource/title.fxml"));
+	Parent root = FXMLLoader.load(ShootingArtOnline.class.getResource("resource/title.fxml"));
 	primaryStage.setScene(new Scene(root));
 	primaryStage.show();
     }

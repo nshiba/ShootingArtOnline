@@ -3,13 +3,52 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package game;
+
+import config.GameConfig;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Ellipse;
 
 /**
  *
  * @author snake00
  */
 public class Player {
-	
+
+	private int x;
+	private int y;
+	private boolean isDead;
+	int vx = 3, vy = 3;
+
+	Player(int x, int y) {
+		this.x = x;
+		this.y = y;
+		this.isDead = false;
+	}
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void update() {
+		if (Global.getX() < x) {
+			x -= vx;
+		} else {
+			x += vx;
+		}
+		if (Global.getY() < y) {
+			y -= vy;
+		} else {
+			y += vy;
+		}
+
+	}
+
+	void draw(Canvas pane) {
+
+		
+
+	}
+
 }
