@@ -18,14 +18,17 @@ import javafx.stage.Stage;
  */
 public class ShootingArtOnline extends Application {
 
-	 @Override
-    public void start(Stage primaryStage) throws IOException {
-	Parent root = FXMLLoader.load(ShootingArtOnline.class.getResource("resource/title.fxml"));
-	primaryStage.setScene(new Scene(root));
-	primaryStage.show();
-    }
+	@Override
+	public void start(Stage primaryStage) throws IOException {
+		GamePanel pane = new GamePanel();
+		primaryStage.setScene(new Scene(pane));
+		pane.setPrefSize(1280, 800);
+		pane.setMinSize(1280, 800);
+		pane.setMaxSize(1280, 800);
+		primaryStage.show();
+	}
 
-    public static void main(String[] args) {
-	launch(args);
-    }
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
