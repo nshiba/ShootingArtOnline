@@ -1,6 +1,8 @@
 package shootingartonline;
 
+import static game.Global.*;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +15,9 @@ public class TestUI {
         this.socket = new SocketClient() {
             @Override
             protected void onMassage(String str) {
-                System.out.println(str);
+                String[] massages = str.split(",");
+                setEnemyX(Integer.valueOf(massages[0]));
+                setEnemyY(Integer.valueOf(massages[1]));
             }
         };
 
@@ -25,11 +29,11 @@ public class TestUI {
     }
 
     public void run(){
-        PlayerBean player = new PlayerBean();
-        player.setX(100);
-        player.setY(100);
-        player.setBulletType(0);
-        player.setHp(100);
+//        PlayerBean player = new PlayerBean();
+//        player.setX(100);
+//        player.setY(100);
+//        player.setBulletType(0);
+//        player.setHp(100);
 
 
         BufferedReader keyin = new BufferedReader(new InputStreamReader(System.in));
@@ -39,13 +43,13 @@ public class TestUI {
 //            } catch (InterruptedException ex) {
 //                Logger.getLogger(TestUI.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-//            try {
-//                String line = keyin.readLine();
-//            } catch (IOException ex) {
-//                Logger.getLogger(TestUI.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//                socket.write(line);
-            socket.write(playerinfoToString(player));
+            try {
+                String line = keyin.readLine() + "\n";
+                socket.write(line);
+            } catch (IOException ex) {
+                Logger.getLogger(TestUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//            socket.write(playerinfoToString(player));
         }
     }
 

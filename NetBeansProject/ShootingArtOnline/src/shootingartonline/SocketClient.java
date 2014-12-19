@@ -58,7 +58,7 @@ public abstract class SocketClient extends Thread {
                 String strToken = new String(buf, 0, size, "UTF-8");
                 String[] massages = strToken.split("\n");
                 for (String massage : massages) {
-                    onMassage(remoteAddr +  " : " + massage);
+                    onMassage(massage);
                 }
             }
         } catch (Exception e) {
