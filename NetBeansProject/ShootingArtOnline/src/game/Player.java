@@ -7,6 +7,8 @@ package game;
 
 import config.GameConfig;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Ellipse;
 
@@ -45,9 +47,10 @@ public class Player {
 
 	}
 
-	void draw(Canvas pane) {
+	void draw(GraphicsContext context) {
 
-		
+		context.setFill(Color.rgb(255, 0, 0, 1.0));
+		context.fillOval(x, y, GameConfig.radius, GameConfig.radius);
 
 	}
 
