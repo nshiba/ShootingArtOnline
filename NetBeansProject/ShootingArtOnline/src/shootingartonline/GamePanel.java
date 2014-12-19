@@ -26,12 +26,8 @@ import javafx.scene.layout.Pane;
  *
  * @author snake00
  */
-public class TitleController implements Initializable {
-	@FXML
-	private Button testButton;
-	@FXML
-	public Pane gamePanel;
-	
+public class GamePanel extends Pane implements Initializable {
+
 	public Canvas canvas;
 	
 	private Game game;
@@ -42,7 +38,7 @@ public class TitleController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// TODO
-		gamePanel.getChildren().add(canvas);
+		this.getChildren().add(canvas);
 		game = new Game(canvas);
 		game.start(game);
 		System.out.println("game start!!");
