@@ -118,6 +118,10 @@ public class GameConfig {
 	 */
 	final public static int BoostTime = 50;
 	
-	/**class**/
-	
+	/**window constant**/
+	/**
+	 * window width size
+	 */
+	final public static int WIDTH = 1280;
+	final public static int HEIGHT = 800;
 }

@@ -5,6 +5,7 @@
  */
 package game;
 
+import config.GameConfig;
 import static config.GameConfig.EnemyBulletCount;
 import static config.GameConfig.PlayerBulletCount;
 import static game.Global.FrameCount;
@@ -15,7 +16,6 @@ import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 /**
@@ -62,7 +62,7 @@ public class Game extends Task {
 
 				gc = pane.getGraphicsContext2D();
 				gc.setFill(Color.rgb(0, 0, 0, 1.0));
-				gc.clearRect(0, 0, 1280, 800);
+				gc.clearRect(0, 0, GameConfig.WIDTH, GameConfig.HEIGHT);
 				run();
 
 			}

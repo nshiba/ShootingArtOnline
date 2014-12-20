@@ -5,6 +5,7 @@
  */
 package shootingartonline;
 
+import config.GameConfig;
 import game.Game;
 import static game.Global.setMouseX;
 import static game.Global.setMouseY;
@@ -37,7 +38,7 @@ public class GamePanel extends Pane {
 	 */
 	public GamePanel() {
 		// TODO
-		canvas = new Canvas(1280, 800);
+		canvas = new Canvas(GameConfig.WIDTH, GameConfig.HEIGHT);
 		this.getChildren().add(canvas);
 		game = new Game(canvas);
 		game.start(game);
