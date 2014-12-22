@@ -54,11 +54,11 @@ public class GamePanel extends Pane {
 		this.setOnMouseMoved((MouseEvent event) -> {
 			setMouseX(event.getSceneX());
 			setMouseY(event.getSceneY());
-			System.out.println(event.getSceneX());
+			//System.out.println(event.getSceneX());
 		});
 		/**
 		 * set key event
-		 * int key -> 0,1,2,3
+		 * space -> bullet change
 		 * boolean boost -> false or true;
 		 */
 		this.setOnKeyPressed((KeyEvent event) -> {

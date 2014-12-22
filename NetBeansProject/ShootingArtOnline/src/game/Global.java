@@ -48,12 +48,26 @@ public class Global {
 		return mouseX;
 	}
 	/**
+	 * my machine getX
+	 * @return 
+	 */
+	public static int getX(){
+		return myX;
+	}
+	/**
 	 * my machine set X
 	 * @param myx
 	 */
 	public static void setX(int myx){
 		 myX = myx;
 		
+	}
+	/**
+	 * my machine get Y
+	 * @return 
+	 */
+	public static int getY(){
+		return myY;
 	}
 	/**
 	 * my machine set Y

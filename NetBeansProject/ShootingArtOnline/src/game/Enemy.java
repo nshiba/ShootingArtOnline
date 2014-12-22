@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package game;
 
 import config.GameConfig;
+import static game.Global.playerBullet;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -15,10 +15,13 @@ import javafx.scene.paint.Color;
  * @author snake00
  */
 public class Enemy {
+
 	private int x;
 	private int y;
 	private boolean isDead;
 	int vx = 3, vy = 3;
+	float radius;
+	int HP;
 
 	Enemy(int x, int y) {
 		this.x = x;
@@ -40,5 +43,19 @@ public class Enemy {
 		context.setFill(Color.rgb(0, 255, 0, 1.0));
 		context.fillOval(x, y, GameConfig.radius, GameConfig.radius);
 
+	}
+
+	public float getRadius() {
+		return radius;
+	}
+
+	void reduceLife(int i) {
+		HP -= playerBullet[i].damage;
+
+		// 体力が無くなると死亡する。
+		if (HP <= 0) {
+			HP = 0;
+			isDead = true;
+		}
 	}
 }

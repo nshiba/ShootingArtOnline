@@ -6,8 +6,9 @@
 package game;
 
 import config.GameConfig;
-import static game.Global.getEnemyX;
-import static game.Global.getEnemyY;
+import static game.Global.enemyBullet;
+import static game.Global.getMouseX;
+import static game.Global.getMouseY;
 import static game.Global.playerBullet;
 import static java.lang.Math.atan2;
 import javafx.scene.canvas.GraphicsContext;
@@ -29,7 +30,9 @@ public class Player {
 	int BulletTime;
 	int BoostUse = GameConfig.BoostMaxUse;
 	int BoostTimeCount;
+	float radius = GameConfig.radius;
 	float theta;
+	int HP;
 
 	Player(int x, int y) {
 		this.x = x;
@@ -40,6 +43,10 @@ public class Player {
 	public boolean isDead() {
 		return isDead;
 	}
+	
+	public float calcTheta(){
+		return (float) atan2(getMouseY() - y, getMouseX() - x);
+	}
 
 	void fire() {
 		if (num != 0) {
@@ -48,7 +55,7 @@ public class Player {
 					if (BulletTime == 0) {
 						float v = GameConfig.BeamGunSpeed;
 						energy -= GameConfig.BeamGunEnergy;
-						theta = (float) atan2(getEnemyY() - y, getEnemyX() - x);
+						theta = calcTheta(); //(float) atan2(getEnemyY() - y, getEnemyX() - x);
 						setBullet(x, y, v, v, num, GameConfig.BeamGunDamage, GameConfig.BeamGunCombNum, theta, 8);
 					}
 					BulletTime++;
@@ -61,7 +68,7 @@ public class Player {
 					if (BulletTime == 0) {
 						float v = GameConfig.SniperSpeed;
 						energy -= GameConfig.SniperEnergy;
-						theta = (float) atan2(getEnemyY() - y, getEnemyX() - x);
+						theta = calcTheta(); //(float) atan2(getEnemyY() - y, getEnemyX() - x);
 						setBullet(x, y, v, v, num, GameConfig.SniperDamage, GameConfig.SniperCombNum, theta, 15);
 					}
 					BulletTime++;
@@ -74,7 +81,7 @@ public class Player {
 					if (BulletTime == 0) {
 						float v = GameConfig.BigBeamSpeed;
 						energy -= GameConfig.BigBeamEnergy;
-						theta = (float) atan2(getEnemyY() - y, getEnemyX() - x);
+						theta = calcTheta(); //(float) atan2(getEnemyY() - y, getEnemyX() - x);
 						setBullet(x, y, v, v, num, GameConfig.BigBeamDamage, GameConfig.BigBeamCombNum, theta, 90);
 					}
 					BulletTime++;
@@ -107,14 +114,40 @@ public class Player {
 
 	}
 
-	private void setBullet(int x, int y, float v, float v0, int num, int damage, int comb, float theta, int radius) {
+	/**
+	 * 空いてる弾倉に弾を生成
+	 *
+	 * @param x
+	 * @param y
+	 * @param vx
+	 * @param vy
+	 * @param num
+	 * @param damage
+	 * @param comb
+	 * @param theta
+	 * @param radius
+	 */
+	private void setBullet(int x, int y, float vx, float vy, int num, int damage, int comb, float theta, int radius) {
 		int h = 100;
-		// 死んでいる弾を再利用する。
-		for (int i = 0; i < playerBullet.length; i++) {
-			if (playerBullet[i].isDead()) {
-				playerBullet[i].setBullet(x, y, vx, vy, num, h, damage  /*  * select.getDamageSet()*/, comb, theta, radius, 1);
+		for (Bullet playerBullet1 : playerBullet) {
+			if (playerBullet1.isDead()) {
+				playerBullet1.setBullet(x, y, vx, vy, num, h, damage /*  * select.getDamageSet()*/, comb, theta, radius, 1);
 				break;
 			}
+		}
+	}
+
+	public float getRadius() {
+		return radius;
+	}
+
+	public void reduceLife(int i) {
+		HP -= enemyBullet[i].damage;
+
+		// 体力が無くなると死亡する。
+		if (HP <= 0) {
+			HP = 0;
+			isDead = true;
 		}
 	}
 

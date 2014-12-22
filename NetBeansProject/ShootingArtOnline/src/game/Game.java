@@ -10,6 +10,10 @@ import static config.GameConfig.EnemyBulletCount;
 import static config.GameConfig.PlayerBulletCount;
 import static game.Global.FrameCount;
 import static game.Global.enemyBullet;
+import static game.Global.getEnemyX;
+import static game.Global.getEnemyY;
+import static game.Global.getX;
+import static game.Global.getY;
 import static game.Global.playerBullet;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
@@ -76,9 +80,9 @@ public class Game extends Task {
 		FrameCount = 0;
 
 		player = new Player(100, 200);
-		enemy = new Enemy(1000,750);
+		enemy = new Enemy(1000, 750);
 		/**
-		 * enemy test 
+		 * enemy test
 		 */
 		Global.setEnemyX(700);
 		Global.setEnemyY(700);
@@ -101,8 +105,53 @@ public class Game extends Task {
 		bg();
 		player.update();
 		enemy.update();
+		for (Bullet playerBullet1 : playerBullet) {
+			playerBullet1.update();
+		}
+		for (Bullet enemyBullet1 : enemyBullet) {
+			enemyBullet1.update();
+		}
+
 		player.draw(gc);
 		enemy.draw(gc);
+
+		for (Bullet playerBullet1 : playerBullet) {
+			playerBullet1.draw(gc);
+		}
+		for (Bullet enemyBullet1 : enemyBullet) {
+			enemyBullet1.draw(gc);
+		}
+
+		for (int i = 0; i < enemyBullet.length; i++) {
+			if (enemyBullet[i].isDead()) {
+				continue;
+			}
+
+			float dx = enemyBullet[i].getX() - getX();
+			float dy = enemyBullet[i].getY() - getY();
+			float r = enemyBullet[i].getRadius() + player.getRadius();
+
+			if (dx * dx + dy * dy < r * r) {
+				player.reduceLife(i);
+				enemyBullet[i].kill();
+			}
+		}
+
+		// 敵と自機の弾との衝突判定。
+		for (int i = 0; i < playerBullet.length; i++) {
+			if (playerBullet[i].isDead()) {
+				continue;
+			}
+
+			float dx = playerBullet[i].getX() - getEnemyX();
+			float dy = playerBullet[i].getY() - getEnemyY();
+			float r = playerBullet[i].getRadius() + enemy.getRadius();
+
+			if (dx * dx + dy * dy < r * r) {
+				playerBullet[i].kill();
+				enemy.reduceLife(i);
+			}
+		}
 	}
 
 	@Override
