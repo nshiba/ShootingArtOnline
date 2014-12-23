@@ -20,7 +20,6 @@ public class TestUI {
                 setEnemyY(Integer.valueOf(massages[1]));
             }
         };
-
         this.socket.start();
     }
 
@@ -29,20 +28,8 @@ public class TestUI {
     }
 
     public void run(){
-//        PlayerBean player = new PlayerBean();
-//        player.setX(100);
-//        player.setY(100);
-//        player.setBulletType(0);
-//        player.setHp(100);
-
-
         BufferedReader keyin = new BufferedReader(new InputStreamReader(System.in));
         while (true) {                
-//            try {
-//                Thread.sleep(1);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(TestUI.class.getName()).log(Level.SEVERE, null, ex);
-//            }
             try {
                 String line = keyin.readLine() + "\n";
                 socket.write(line);
