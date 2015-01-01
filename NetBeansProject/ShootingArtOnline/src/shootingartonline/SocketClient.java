@@ -57,8 +57,12 @@ public abstract class SocketClient extends Thread {
             while ((size = socket.getInputStream().read(buf))> 0) {                
                 String strToken = new String(buf, 0, size, "UTF-8");
                 String[] massages = strToken.split("\n");
-                for (String massage : massages) {
-                    onMassage(massage);
+                for (String message : massages) {
+                if(message.equals("logout")){
+                    logout();
+                    break;
+                }
+                    onMassage(message);
                 }
             }
         } catch (Exception e) {

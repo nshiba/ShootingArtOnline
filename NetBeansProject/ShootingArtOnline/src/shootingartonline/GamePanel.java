@@ -42,6 +42,7 @@ public class GamePanel extends Pane {
 		game = new Game(canvas);
 		game.start(game);
 		setMouseEvent();
+        new TestUI().run();
 		System.out.println("game start!!");
 	}
 
