@@ -48,11 +48,16 @@ public class Enemy {
 	public float getRadius() {
 		return radius;
 	}
-
+	/**
+	 * reduce enemy life
+	 * @param i 
+	 */
 	void reduceLife(int i) {
 		HP -= playerBullet[i].damage;
 
-		// 体力が無くなると死亡する。
+		/**
+		 * if HP <= 0 is dead 
+		 */
 		if (HP <= 0) {
 			HP = 0;
 			isDead = true;

@@ -43,8 +43,8 @@ public class Player {
 	public boolean isDead() {
 		return isDead;
 	}
-	
-	public float calcTheta(){
+
+	public float calcTheta() {
 		return (float) atan2(getMouseY() - y, getMouseX() - x);
 	}
 

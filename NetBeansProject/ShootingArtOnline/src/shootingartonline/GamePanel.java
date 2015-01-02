@@ -10,6 +10,7 @@ import game.Game;
 import static game.Global.setMouseX;
 import static game.Global.setMouseY;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -62,7 +63,12 @@ public class GamePanel extends Pane {
 		 * boolean boost -> false or true;
 		 */
 		this.setOnKeyPressed((KeyEvent event) -> {
-			
+			/**
+			 * bullet change +1  if  bullet = 3 -> 0 
+			 */
+			if(event.getCode() == KeyCode.SPACE){
+				
+			}
 		});
 	}
 
