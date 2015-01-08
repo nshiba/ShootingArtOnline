@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import static shootingartonline.StaticData.*;
 
 public abstract class SocketClient extends Thread {
+    private String HOST = "localhost";
 
     private static Charset charset = Charset.forName("UTF-8");
     private Socket socket = null;
@@ -20,8 +21,8 @@ public abstract class SocketClient extends Thread {
 
         try {
             System.out.println("接続するIPを入力してください");
-            String host = keyin.readLine();
-			InetSocketAddress socketAddress = new InetSocketAddress(host,PORT);
+//            String host = keyin.readLine();
+			InetSocketAddress socketAddress = new InetSocketAddress(HOST,PORT);
 					
 
             socket = new Socket();
