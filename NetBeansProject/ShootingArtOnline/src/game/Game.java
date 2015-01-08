@@ -112,6 +112,10 @@ public class Game extends Task {
 			enemyBullet1.update();
 		}
 
+		// 自機が弾を撃つ。
+		player.fire(Global.getMyBulletFire());
+		// 敵が弾を撃つ。
+		enemy.fire();
 		player.draw(gc);
 		enemy.draw(gc);
 
@@ -152,6 +156,7 @@ public class Game extends Task {
 				enemy.reduceLife(i);
 			}
 		}
+		FrameCount++;
 	}
 
 	@Override

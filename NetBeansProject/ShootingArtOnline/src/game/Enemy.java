@@ -6,7 +6,11 @@
 package game;
 
 import config.GameConfig;
+import static game.Global.enemyBullet;
+import static game.Global.getX;
+import static game.Global.getY;
 import static game.Global.playerBullet;
+import static java.lang.Math.atan2;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -20,7 +24,14 @@ public class Enemy {
 	private int y;
 	private boolean isDead;
 	int vx = 3, vy = 3;
-	float radius;
+	int num; //bullet number
+	int energyMax = GameConfig.EnergyMax;
+	int energy = energyMax;
+	int BulletTime;
+	int BoostUse = GameConfig.BoostMaxUse;
+	int BoostTimeCount;
+	float radius = GameConfig.radius;
+	float theta;
 	int HP;
 
 	Enemy(int x, int y) {
@@ -48,19 +59,80 @@ public class Enemy {
 	public float getRadius() {
 		return radius;
 	}
+
 	/**
 	 * reduce enemy life
-	 * @param i 
+	 *
+	 * @param i
 	 */
 	void reduceLife(int i) {
 		HP -= playerBullet[i].damage;
 
 		/**
-		 * if HP <= 0 is dead 
+		 * if HP <= 0 is dead
 		 */
 		if (HP <= 0) {
 			HP = 0;
 			isDead = true;
+		}
+	}
+
+	// 弾を撃つ。
+	void fire() {
+		// ToDo
+		if (num != 0) {
+			if (num == 1) {
+				if (energy >= GameConfig.BeamGunEnergy) {
+					if (BulletTime == 0) {
+						float v = GameConfig.BeamGunSpeed;
+						energy -= GameConfig.BeamGunEnergy / 2;
+						theta = (float) atan2(getY() - y, getX() - x);
+						setBullet(x, y, v, v, num, GameConfig.BeamGunDamage, GameConfig.BeamGunCombNum, theta, 8);
+					}
+					BulletTime++;
+					if (BulletTime >= GameConfig.BeamGunTime) {
+						BulletTime = 0;
+					}
+				}
+			} else if (num == 2) {
+				if (energy >= GameConfig.SniperEnergy) {
+					if (BulletTime == 0) {
+						float v = GameConfig.SniperSpeed;
+						energy -= GameConfig.SniperEnergy / 2;
+						theta = (float) atan2(getY() - y, getX() - x);
+						setBullet(x, y, v, v, num, GameConfig.SniperDamage, GameConfig.SniperCombNum, theta, 15);
+					}
+					BulletTime++;
+					if (BulletTime >= GameConfig.SniperTime) {
+						BulletTime = 0;
+					}
+				}
+			} else if (num == 3) {
+				if (energy >= GameConfig.BigBeamEnergy) {
+					if (BulletTime == 0) {
+						float v = GameConfig.BigBeamSpeed;
+						energy -= GameConfig.BigBeamEnergy / 2;
+						theta = (float) atan2(getY() - y, getX() - x);
+						setBullet(x, y, v, v, num, GameConfig.BigBeamDamage, GameConfig.BigBeamCombNum, theta, 90);
+					}
+					BulletTime++;
+					if (BulletTime >= GameConfig.BigBeamTime) {
+						BulletTime = 0;
+					}
+				}
+			}
+		}
+	}
+
+	void setBullet(float x, float y, float vx, float vy, int num, int damage, int comb, float theta, int radius) {
+		// 弾の色を適当に決める。
+		int h = 100;
+
+		for (Bullet enemyBullet1 : enemyBullet) {
+			if (enemyBullet1.isDead()) {
+				enemyBullet1.setBullet(x, y, vx, vy, num, h, damage /* * option.getDifficulty()*/, comb, theta, radius, 0);
+				break;
+			}
 		}
 	}
 }

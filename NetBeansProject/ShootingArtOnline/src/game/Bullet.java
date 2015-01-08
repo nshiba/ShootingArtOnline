@@ -9,8 +9,6 @@ import config.GameConfig;
 import static game.Global.FrameCount;
 import static game.Global.getEnemyX;
 import static game.Global.getEnemyY;
-import static game.Global.getX;
-import static game.Global.getY;
 import static java.lang.Math.atan2;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -143,16 +141,16 @@ public class Bullet {
 		}
 		if (num == 1) {
 
-			context.setFill(Color.hsb(100, 100, 100, 180));
+			context.setFill(Color.hsb(100, 1, 1, 1));
 			context.fillOval(x, y, radius, radius);
 
 		} else if (num == 2) {
 
-			context.setFill(Color.hsb(300, 100, 100, 180));
+			context.setFill(Color.hsb(300, 1, 1, 1));
 			context.fillOval(x, y, radius, radius);
 		} else if (num == 3) {
 
-			context.setFill(Color.hsb(60, 100, 100, 130));
+			context.setFill(Color.hsb(60, 1, 1, 1));
 			context.fillOval(x, y, radius, radius);
 		}
 	}

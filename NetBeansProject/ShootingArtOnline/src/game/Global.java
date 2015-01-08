@@ -17,6 +17,8 @@ public class Global {
 	public static int myY;
 	public static int enemyX;
 	public static int enemyY;
+	public static int myBulletNum;
+	public static boolean isMyBulletFire;
 
 	/**
 	 * enemy bullet
@@ -117,5 +119,33 @@ public class Global {
 	 */
 	public static int getEnemyY() {
 		return enemyY;
+	}
+	/**
+	 * my bullet number get
+	 * @return 
+	 */
+	public static int getMyBulletNum(){
+		return myBulletNum;
+	}
+	/**
+	 * my bullet number set
+	 * @param num
+	 */
+	public static void setMyBulletNum(int num){
+		myBulletNum = num;
+	}
+	/**
+	 * get my bullet fire
+	 * @return 
+	 */
+	public static boolean getMyBulletFire(){
+		return isMyBulletFire;
+	}
+	/**
+	 * set my bullet fire
+	 * @param isFire
+	 */
+	public static void setMyBulletFire(boolean  isFire) {
+		isMyBulletFire = isFire;
 	}
 }

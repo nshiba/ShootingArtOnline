@@ -6,6 +6,7 @@
 package game;
 
 import config.GameConfig;
+import static game.Global.FrameCount;
 import static game.Global.enemyBullet;
 import static game.Global.getMouseX;
 import static game.Global.getMouseY;
@@ -45,11 +46,13 @@ public class Player {
 	}
 
 	public float calcTheta() {
-		return (float) atan2(getMouseY() - y, getMouseX() - x);
+		return (float) atan2(Global.getEnemyY() - y, Global.getEnemyX() - x);
 	}
 
-	void fire() {
-		if (num != 0) {
+	void fire(boolean isFire) {
+		if (isFire == true) {
+			num = Global.getMyBulletNum();
+			System.out.println("bullet num is" + num);
 			if (num == 1) {
 				if (energy >= GameConfig.BeamGunEnergy) {
 					if (BulletTime == 0) {
@@ -105,9 +108,15 @@ public class Player {
 			y += vy;
 		}
 
+		if (FrameCount % 2 == 0) {
+			if (energy <= energyMax) {
+				energy += 2;
+			}
+		}
 	}
 
-	void draw(GraphicsContext context) {
+	void draw(GraphicsContext context
+	) {
 
 		context.setFill(Color.rgb(255, 0, 0, 1.0));
 		context.fillOval(x, y, GameConfig.radius, GameConfig.radius);
@@ -132,6 +141,7 @@ public class Player {
 		for (Bullet playerBullet1 : playerBullet) {
 			if (playerBullet1.isDead()) {
 				playerBullet1.setBullet(x, y, vx, vy, num, h, damage /*  * select.getDamageSet()*/, comb, theta, radius, 1);
+				System.out.println("make bullet");
 				break;
 			}
 		}

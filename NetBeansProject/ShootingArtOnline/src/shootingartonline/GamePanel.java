@@ -7,11 +7,16 @@ package shootingartonline;
 
 import config.GameConfig;
 import game.Game;
+import game.Global;
 import static game.Global.setMouseX;
 import static game.Global.setMouseY;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -25,6 +30,7 @@ public class GamePanel extends Pane {
 	public Canvas canvas;
 
 	private Game game;
+	private int num; //bulete num
 
 	/**
 	 * Initializes the controller class.
@@ -36,6 +42,7 @@ public class GamePanel extends Pane {
 		game = new Game(canvas);
 		game.start(game);
 		setMouseEvent();
+		num = 1;
 		System.out.println("game start!!");
 	}
 
@@ -43,9 +50,6 @@ public class GamePanel extends Pane {
 		setMouseX(event.getSceneX());
 		setMouseY(event.getSceneY());
 		System.out.println(event.getSceneX());
-	}
-
-	private void keyAction(KeyEvent event) {
 	}
 
 	private void setMouseEvent() {
@@ -57,19 +61,21 @@ public class GamePanel extends Pane {
 			setMouseY(event.getSceneY());
 			//System.out.println(event.getSceneX());
 		});
-		/**
-		 * set key event
-		 * space -> bullet change
-		 * boolean boost -> false or true;
+
+		/*this.getScene().setOnKeyPressed(
 		 */
-		this.setOnKeyPressed((KeyEvent event) -> {
-			/**
-			 * bullet change +1  if  bullet = 3 -> 0 
-			 */
-			if(event.getCode() == KeyCode.SPACE){
-				
-			}
+		/**
+		 * on click fire! fire!(Eugen風)
+		 */
+		this.setOnMousePressed((MouseEvent event) -> {
+			Global.setMyBulletFire(true);
+			System.out.println("mouse click");
 		});
+		this.setOnMouseReleased((MouseEvent event) -> {
+			Global.setMyBulletFire(false);
+			System.out.println("mouse released");
+		});
+
 	}
 
 }
