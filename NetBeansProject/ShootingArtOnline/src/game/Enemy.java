@@ -36,7 +36,7 @@ public class Enemy {
 	int BoostTimeCount;
 	float radius = GameConfig.radius;
 	float theta;
-	int HP;
+	int HP=GameConfig.BaseMaxHP;
 
 	Enemy(int x, int y) {
 		this.x = x;
@@ -67,6 +67,10 @@ public class Enemy {
 
 		context.setFill(Color.rgb(0, 255, 0, 1.0));
 		context.fillOval(x, y, GameConfig.radius, GameConfig.radius);
+		context.setFill(Color.hsb(220, 1, 1, 1));
+		context.fillRect(770, 20, HP / 20, 20);
+		context.setFill(Color.hsb(100, 1, 1, 1));
+		context.fillRect(770, 45, energy / 2, 5);
 
 	}
 
