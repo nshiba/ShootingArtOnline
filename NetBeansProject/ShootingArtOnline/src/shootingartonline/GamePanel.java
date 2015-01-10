@@ -5,19 +5,12 @@
  */
 package shootingartonline;
 
+import config.GameConfig;
 import game.Game;
+import game.Global;
 import static game.Global.setMouseX;
 import static game.Global.setMouseY;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -31,17 +24,19 @@ public class GamePanel extends Pane {
 	public Canvas canvas;
 
 	private Game game;
+	private int num; //bulete num
 
 	/**
 	 * Initializes the controller class.
 	 */
 	public GamePanel() {
 		// TODO
-		canvas = new Canvas(1280, 800);
+		canvas = new Canvas(GameConfig.WIDTH, GameConfig.HEIGHT);
 		this.getChildren().add(canvas);
 		game = new Game(canvas);
 		game.start(game);
 		setMouseEvent();
+		num = 1;
 		System.out.println("game start!!");
 	}
 
@@ -51,15 +46,30 @@ public class GamePanel extends Pane {
 //		System.out.println(event.getSceneX());
 	}
 
-	private void keyAction(KeyEvent event) {
-	}
-
 	private void setMouseEvent() {
+		/**
+		 * set mouse locate event
+		 */
 		this.setOnMouseMoved((MouseEvent event) -> {
 			setMouseX(event.getSceneX());
 			setMouseY(event.getSceneY());
-//			System.out.println(event.getSceneX());
+			//System.out.println(event.getSceneX());
 		});
+
+		/*this.getScene().setOnKeyPressed(
+		 */
+		/**
+		 * on click fire! fire!(Eugen風)
+		 */
+		this.setOnMousePressed((MouseEvent event) -> {
+			Global.setMyBulletFire(true);
+			System.out.println("mouse click");
+		});
+		this.setOnMouseReleased((MouseEvent event) -> {
+			Global.setMyBulletFire(false);
+			System.out.println("mouse released");
+		});
+
 	}
 
 }

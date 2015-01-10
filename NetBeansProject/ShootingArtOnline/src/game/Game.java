@@ -5,17 +5,21 @@
  */
 package game;
 
+import config.GameConfig;
 import static config.GameConfig.EnemyBulletCount;
 import static config.GameConfig.PlayerBulletCount;
 import static game.Global.FrameCount;
 import static game.Global.enemyBullet;
+import static game.Global.getEnemyX;
+import static game.Global.getEnemyY;
+import static game.Global.getX;
+import static game.Global.getY;
 import static game.Global.playerBullet;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 /**
@@ -61,8 +65,7 @@ public class Game extends Task {
 			public void handle(long time) {
 
 				gc = pane.getGraphicsContext2D();
-				gc.setFill(Color.rgb(0, 0, 0, 1.0));
-				gc.clearRect(0, 0, 1280, 800);
+				gc.clearRect(0, 0, GameConfig.WIDTH, GameConfig.HEIGHT);
 				run();
 
 			}
@@ -76,12 +79,12 @@ public class Game extends Task {
 		FrameCount = 0;
 
 		player = new Player(100, 200);
-		enemy = new Enemy(1000,750);
+		enemy = new Enemy(1000, 750);
 		/**
-		 * enemy test 
+		 * enemy test
 		 */
 		Global.setEnemyX(700);
-		Global.setEnemyY(700);
+		Global.setEnemyY(400);
 		playerBullet = new Bullet[PlayerBulletCount];
 		for (int i = 0; i < playerBullet.length; i++) {
 			playerBullet[i] = new Bullet();
@@ -94,6 +97,8 @@ public class Game extends Task {
 	}
 
 	private void bg() {
+		gc.setFill(Color.hsb(0, 0, 0, 1.0));
+		gc.fillRect(0, 0, GameConfig.WIDTH + 100, GameConfig.HEIGHT);
 
 	}
 
@@ -101,8 +106,58 @@ public class Game extends Task {
 		bg();
 		player.update();
 		enemy.update();
+		for (Bullet playerBullet1 : playerBullet) {
+			playerBullet1.update();
+		}
+		for (Bullet enemyBullet1 : enemyBullet) {
+			enemyBullet1.update();
+		}
+
+		// 自機が弾を撃つ。
+		player.fire(Global.getMyBulletFire());
+		// 敵が弾を撃つ。
+		enemy.fire();
 		player.draw(gc);
 		enemy.draw(gc);
+
+		for (Bullet playerBullet1 : playerBullet) {
+			playerBullet1.draw(gc);
+		}
+		for (Bullet enemyBullet1 : enemyBullet) {
+			enemyBullet1.draw(gc);
+		}
+
+		for (int i = 0; i < enemyBullet.length; i++) {
+			if (enemyBullet[i].isDead()) {
+				continue;
+			}
+
+			float dx = enemyBullet[i].getX() - ( getX() + player.getRadius()/2 );
+			float dy = enemyBullet[i].getY() - ( getY() + player.getRadius()/2 );
+			float r = enemyBullet[i].getRadius() + player.getRadius();
+
+			if (dx * dx + dy * dy < r * r) {
+				player.reduceLife(i);
+				enemyBullet[i].kill();
+			}
+		}
+
+		// 敵と自機の弾との衝突判定。
+		for (int i = 0; i < playerBullet.length; i++) {
+			if (playerBullet[i].isDead()) {
+				continue;
+			}
+
+			float dx = playerBullet[i].getX() - ( getEnemyX() +  enemy.getRadius()/2 );
+			float dy = playerBullet[i].getY() - ( getEnemyY() +  enemy.getRadius()/2 );
+			float r = playerBullet[i].getRadius() + enemy.getRadius();
+
+			if (dx * dx + dy * dy < r * r) {
+				playerBullet[i].kill();
+				enemy.reduceLife(i);
+			}
+		}
+		FrameCount++;
 	}
 
 	@Override

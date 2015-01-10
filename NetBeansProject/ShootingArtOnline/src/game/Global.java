@@ -17,6 +17,9 @@ public class Global {
 	public static int myY;
 	public static int enemyX;
 	public static int enemyY;
+	public static int myBulletNum;
+	public static boolean isMyBulletFire;
+	public static boolean isBoostUse;
 
 	/**
 	 * enemy bullet
@@ -32,13 +35,14 @@ public class Global {
 	 */
 	public static int FrameCount;
 	
+	
 	/**
 	 * mouse set X
 	 * @param x
 	 */
 	public static void setMouseX(double x){
 		mouseX = (int)x;
-		System.out.println("setok");
+		//System.out.println("setok");
 	}
 	/**
 	 * mouse get X
@@ -48,12 +52,26 @@ public class Global {
 		return mouseX;
 	}
 	/**
+	 * my machine getX
+	 * @return 
+	 */
+	public static int getX(){
+		return myX;
+	}
+	/**
 	 * my machine set X
 	 * @param myx
 	 */
 	public static void setX(int myx){
 		 myX = myx;
 		
+	}
+	/**
+	 * my machine get Y
+	 * @return 
+	 */
+	public static int getY(){
+		return myY;
 	}
 	/**
 	 * my machine set Y
@@ -105,5 +123,44 @@ public class Global {
 	 */
 	public static int getEnemyY() {
 		return enemyY;
+	}
+	/**
+	 * my bullet number get
+	 * @return 
+	 */
+	public static int getMyBulletNum(){
+		return myBulletNum;
+	}
+	/**
+	 * my bullet number set
+	 * @param num
+	 */
+	public static void setMyBulletNum(int num){
+		myBulletNum = num;
+	}
+	/**
+	 * get my bullet fire
+	 * @return 
+	 */
+	public static boolean getMyBulletFire(){
+		return isMyBulletFire;
+	}
+	/**
+	 * set my bullet fire
+	 * @param isFire
+	 */
+	public static void setMyBulletFire(boolean  isFire) {
+		isMyBulletFire = isFire;
+	}
+	/**
+	 * get boost use true or false
+	 * @return 
+	 */
+	public static boolean getBoostUse() {
+		return isBoostUse;
+	}
+
+	public static void setBoostUse(boolean isUse) {
+		isBoostUse = isUse;
 	}
 }
