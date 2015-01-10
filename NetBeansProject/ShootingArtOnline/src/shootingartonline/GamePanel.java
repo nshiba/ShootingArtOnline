@@ -43,7 +43,7 @@ public class GamePanel extends Pane {
 	private void getMouseLocate(MouseEvent event) {
 		setMouseX(event.getSceneX());
 		setMouseY(event.getSceneY());
-		System.out.println(event.getSceneX());
+//		System.out.println(event.getSceneX());
 	}
 
 	private void setMouseEvent() {

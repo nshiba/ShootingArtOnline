@@ -35,6 +35,7 @@ public class TestUI implements Runnable {
         this.socket = new SocketClient() {
             @Override
             protected void onMassage(String str) {
+                System.out.println(str);
                 String[] massages = str.split(",");
                 setEnemyX(Integer.valueOf(massages[0]));
                 setEnemyY(Integer.valueOf(massages[1]));

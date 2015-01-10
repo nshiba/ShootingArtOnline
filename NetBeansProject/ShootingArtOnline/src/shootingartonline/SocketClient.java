@@ -63,6 +63,7 @@ public abstract class SocketClient extends Thread {
                     logout();
                     break;
                 }
+//                    System.out.println(message);
                     onMassage(message);
                 }
             }
