@@ -118,8 +118,12 @@ public class MainServer extends Thread{
                 String bufContent = charset.decode(buf).toString();
                 String[] contents = bufContent.split("\n");
                 for (String content : contents) {
+                    String[] zahyou = content.split(",");
+                    player.setX(Integer.valueOf(zahyou[0]));
+                    player.setY(Integer.valueOf(zahyou[1]));
                     System.out.println("受信しました playerNumber" + player.getPlayerNumber() + " : " + remoteAddr +  " : " + content);
                 }
+                playerMap.put(channel,player);
 
                 buf = charset.encode(CharBuffer.wrap(bufContent));
 
@@ -157,17 +161,31 @@ public class MainServer extends Thread{
 
         if(bout != null) {
             System.out.println("書込します");
+            PlayerBean player = playerMap.get(channel);
+            ByteBuffer buf = ByteBuffer.allocate(BUF_SIZE);
+            Charset charset = Charset.forName("UTF-8");
 
             try {
-                ByteBuffer bbuf = ByteBuffer.wrap(bout.toByteArray());
-                int size = channel.write(bbuf);
+                String bufContent = "";
 
-                System.out.println("送信サイズ : " + size + "/" + bbuf.limit());
 
-                if (bbuf.hasRemaining()) {
+                for(SocketChannel allChannel : channelList){
+                    PlayerBean enemy = playerMap.get(allChannel);
+                    if(player.getPlayerNumber() != enemy.getPlayerNumber() ){
+                        bufContent = (int)enemy.getX() + "," + (int)enemy.getY();
+                    }
+                }
+
+                buf = charset.encode(CharBuffer.wrap(bufContent));
+
+                int size = channel.write(buf);
+
+                System.out.println("送信サイズ : " + size + "/" + buf.limit());
+
+                if (buf.hasRemaining()) {
                     //bbufの中を送信しきれなかった場合、残りのBufferMapに書き戻し
                     ByteArrayOutputStream rest = new ByteArrayOutputStream();
-                    rest.write(bbuf.array(), bbuf.position(), bbuf.remaining());
+                    rest.write(buf.array(), buf.position(), buf.remaining());
                     bufferMap.put(channel, rest);
 
                     //宛先が書込可能になるのを監視

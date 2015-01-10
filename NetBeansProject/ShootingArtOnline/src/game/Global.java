@@ -99,7 +99,7 @@ public class Global {
 	 * @param enemyx
 	 */
 	public static void setEnemyX(int enemyx){
-        System.out.println("enemyX" + enemyx);
+//        System.out.println("enemyX" + enemyx);
 		enemyX = enemyx;
 	}
 	/**
