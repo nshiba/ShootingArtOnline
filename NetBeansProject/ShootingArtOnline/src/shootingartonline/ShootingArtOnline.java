@@ -16,6 +16,10 @@ public class ShootingArtOnline extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+        TestUI client = new TestUI();
+        Thread t = new Thread(client);
+        t.start();
+
 		GamePanel pane = new GamePanel();
 		primaryStage.setScene(new Scene(pane));
 		pane.setPrefSize(WIDTH, HEIGHT);
