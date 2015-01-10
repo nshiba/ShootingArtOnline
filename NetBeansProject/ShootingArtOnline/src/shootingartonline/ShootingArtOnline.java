@@ -35,23 +35,22 @@ public class ShootingArtOnline extends Application {
 		primaryStage.getScene().setOnKeyPressed((KeyEvent event) -> {
 			System.out.println("key pressed -> "+event.getCode());
 			/**
-			 * bullet change +1 if bullet = 3 -> 0
+			 * bullet pressed key a -> 1 s -> 2 d -> 3
 			 */
-			if (event.getCode() == KeyCode.SPACE /*|| event.getCode() == KeyCode.UNDEFINED*/) {
-				System.out.println("space pressed");
-				if (Global.getMyBulletNum() == 3) {
-					Global.setMyBulletNum(1);
-				} else {
-					int num = Global.getMyBulletNum();
-					num++;
-					Global.setMyBulletNum(num);
-				}
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException ex) {
-					Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
-				}
+			if(event.getCode() == KeyCode.A){
+				Global.setMyBulletNum(1);
+				Global.setMyBulletFire(true);
+			}else if(event.getCode() == KeyCode.S){
+				Global.setMyBulletNum(2);
+				Global.setMyBulletFire(true);
+			}else if(event.getCode() == KeyCode.D){
+				Global.setMyBulletNum(3);
+				Global.setMyBulletFire(true);
+			}else{
+				Global.setMyBulletNum(0);
+				Global.setMyBulletFire(false);
 			}
+			
 			/**
 			 * use boost  speed up my machine
 			 */
@@ -63,6 +62,11 @@ public class ShootingArtOnline extends Application {
 			}
 
 		});
+		
+		primaryStage.getScene().setOnKeyReleased((KeyEvent event) -> {
+			Global.setMyBulletNum(0);
+			Global.setMyBulletFire(false);
+			});
 		
 		
 	}

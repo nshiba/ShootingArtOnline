@@ -114,7 +114,7 @@ public class Game extends Task {
 		}
 
 		// 自機が弾を撃つ。
-		player.fire(Global.getMyBulletFire());
+		player.fire();
 		// 敵が弾を撃つ。
 		enemy.fire();
 		player.draw(gc);

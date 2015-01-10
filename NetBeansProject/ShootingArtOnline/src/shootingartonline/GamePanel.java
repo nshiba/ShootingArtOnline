@@ -56,20 +56,6 @@ public class GamePanel extends Pane {
 			//System.out.println(event.getSceneX());
 		});
 
-		/*this.getScene().setOnKeyPressed(
-		 */
-		/**
-		 * on click fire! fire!(Eugen風)
-		 */
-		this.setOnMousePressed((MouseEvent event) -> {
-			Global.setMyBulletFire(true);
-			System.out.println("mouse click");
-		});
-		this.setOnMouseReleased((MouseEvent event) -> {
-			Global.setMyBulletFire(false);
-			System.out.println("mouse released");
-		});
-
 	}
 
 }
