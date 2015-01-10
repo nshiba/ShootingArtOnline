@@ -82,15 +82,19 @@ public class Bullet {
 		}
 		if (FrameCount % 50 == 0) {
 			if (orNum == 1) {
+				System.out.println("player bullet reset theta -> "+theta);
 				theta = (float) atan2(getEnemyY() - y, getEnemyX() - x);
+				System.out.println("player bullet theta -> "+ theta);
 				orNum = 3;
 			} else if (orNum == 0) {
-				theta = (float) atan2(getY() - y, getX() - x);
+				System.out.println("enemy bullet reset theta -> "+theta);
+				theta = (float) atan2(Global.getY() - y, Global.getX() - x);
+				System.out.println("enemy bullet theta -> "+ theta);
 				orNum = 3;
 			}
 		}
-		x += vx * cos(theta);
-		y += vy * sin(theta);
+		this.x += vx * cos(theta);
+		this.y += vy * sin(theta);
 
 		// 領域外に出たら消す。
 		if (x < 0 || x > GameConfig.WIDTH || y < 0 || y > GameConfig.HEIGHT) {

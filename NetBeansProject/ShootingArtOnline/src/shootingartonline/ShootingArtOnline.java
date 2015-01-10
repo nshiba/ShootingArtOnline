@@ -19,8 +19,9 @@ public class ShootingArtOnline extends Application {
 		GamePanel pane = new GamePanel();
 		primaryStage.setScene(new Scene(pane));
 		pane.setPrefSize(WIDTH, HEIGHT);
-		pane.setMinSize(WIDTH, HEIGHT);
-		pane.setMaxSize(WIDTH, HEIGHT);
+		//pane.setMinSize(WIDTH, HEIGHT);
+		//pane.setMaxSize(WIDTH, HEIGHT);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		
 		/**
@@ -28,11 +29,11 @@ public class ShootingArtOnline extends Application {
 		 * or true;
 		 */
 		primaryStage.getScene().setOnKeyPressed((KeyEvent event) -> {
-			System.out.println("key pressed"+event.getCode());
+			System.out.println("key pressed -> "+event.getCode());
 			/**
 			 * bullet change +1 if bullet = 3 -> 0
 			 */
-			if (event.getCode() == KeyCode.SPACE) {
+			if (event.getCode() == KeyCode.SPACE /*|| event.getCode() == KeyCode.UNDEFINED*/) {
 				System.out.println("space pressed");
 				if (Global.getMyBulletNum() == 3) {
 					Global.setMyBulletNum(1);
@@ -42,9 +43,18 @@ public class ShootingArtOnline extends Application {
 					Global.setMyBulletNum(num);
 				}
 				try {
-					Thread.sleep(200);
+					Thread.sleep(100);
 				} catch (InterruptedException ex) {
 					Logger.getLogger(GamePanel.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+			/**
+			 * use boost  speed up my machine
+			 */
+			if(event.getCode() == KeyCode.X) {
+				System.out.println("X pressed");
+				if(!Global.getBoostUse()){
+				Global.setBoostUse(true);
 				}
 			}
 

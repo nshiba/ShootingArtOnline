@@ -19,6 +19,7 @@ public class Global {
 	public static int enemyY;
 	public static int myBulletNum;
 	public static boolean isMyBulletFire;
+	public static boolean isBoostUse;
 
 	/**
 	 * enemy bullet
@@ -33,6 +34,7 @@ public class Global {
 	 * frame count
 	 */
 	public static int FrameCount;
+	
 	
 	/**
 	 * mouse set X
@@ -147,5 +149,16 @@ public class Global {
 	 */
 	public static void setMyBulletFire(boolean  isFire) {
 		isMyBulletFire = isFire;
+	}
+	/**
+	 * get boost use true or false
+	 * @return 
+	 */
+	public static boolean getBoostUse() {
+		return isBoostUse;
+	}
+
+	public static void setBoostUse(boolean isUse) {
+		isBoostUse = isUse;
 	}
 }

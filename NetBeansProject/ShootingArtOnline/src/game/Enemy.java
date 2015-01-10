@@ -6,11 +6,15 @@
 package game;
 
 import config.GameConfig;
+import static game.Global.FrameCount;
 import static game.Global.enemyBullet;
 import static game.Global.getX;
 import static game.Global.getY;
 import static game.Global.playerBullet;
 import static java.lang.Math.atan2;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -45,8 +49,18 @@ public class Enemy {
 	}
 
 	public void update() {
+		
+		routine();
 		x = Global.getEnemyX();
 		y = Global.getEnemyY();
+		x += vx;
+		y += vy;
+		Global.setEnemyX(x);
+		Global.setEnemyY(y);
+		
+		if(FrameCount % 2 == 0 && energy <= energyMax){
+			this.energy += 2;
+		}
 	}
 
 	void draw(GraphicsContext context) {
@@ -130,9 +144,42 @@ public class Enemy {
 
 		for (Bullet enemyBullet1 : enemyBullet) {
 			if (enemyBullet1.isDead()) {
-				enemyBullet1.setBullet(x, y, vx, vy, num, h, damage /* * option.getDifficulty()*/, comb, theta, radius, 0);
+				enemyBullet1.setBullet(x + (this.radius / 2), y + (this.radius / 2), vx, vy, num, h, damage /* * option.getDifficulty()*/, comb, theta, radius, 0);
 				break;
 			}
+		}
+	}
+
+	//思考ルーチン
+	void routine() {
+		float dx = (getX() + GameConfig.radius / 2) - (x + getRadius() / 2);
+		float dy = (getY() + GameConfig.radius / 2) - (y + getRadius() / 2);
+		float dr = GameConfig.radius + radius;
+		Random rnd = new Random();
+
+		if (FrameCount % 60 == 1) {
+
+			int vector = rnd.nextInt(361);
+			vx = (int) (8 * cos(Math.toRadians(vector)));
+			vy = (int) (8 * sin(Math.toRadians(vector)));
+		}
+		if (FrameCount % 60 == 1) {
+			num = rnd.nextInt(3) + 1;
+		}
+		if (x + radius / 2 - (radius / 2) - 30 < 0) {
+			vx = -vx;
+		} else if (x + radius / 2 + (radius / 2) + 50 > GameConfig.WIDTH) {
+			vx = -vx;
+		}
+		if (y + radius / 2 - (radius / 2) - 30 < 0) {
+			vy = -vy;
+		} else if (y + radius / 2 + (radius / 2) + 50 > GameConfig.HEIGHT) {
+			vy = -vy;
+		}
+		if (dx * dx + dy * dy < 300 * 300) {
+			num = 3;
+		} else if (dx * dx + dy * dy > 800 * 800) {
+			num = 3;
 		}
 	}
 }

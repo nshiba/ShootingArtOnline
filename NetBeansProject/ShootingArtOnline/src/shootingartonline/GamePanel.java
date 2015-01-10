@@ -10,13 +10,7 @@ import game.Game;
 import game.Global;
 import static game.Global.setMouseX;
 import static game.Global.setMouseY;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 

@@ -33,12 +33,13 @@ public class Player {
 	int BoostTimeCount;
 	float radius = GameConfig.radius;
 	float theta;
-	int HP;
+	int HP = GameConfig.BaseMaxHP;
 
 	Player(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.isDead = false;
+		Global.setBoostUse(false);
 	}
 
 	public boolean isDead() {
@@ -52,7 +53,7 @@ public class Player {
 	void fire(boolean isFire) {
 		if (isFire == true) {
 			num = Global.getMyBulletNum();
-			System.out.println("bullet num is" + num);
+			System.out.println("bullet num -> " + num);
 			if (num == 1) {
 				if (energy >= GameConfig.BeamGunEnergy) {
 					if (BulletTime == 0) {
@@ -97,6 +98,32 @@ public class Player {
 	}
 
 	public void update() {
+
+		if (Global.getBoostUse()) {
+			if (energy >= GameConfig.BoostEnergy) {
+				if(BoostUse > 0){
+				BoostUse--;
+				BulletTime = 0;
+				BoostTimeCount = 0;
+				energy -= GameConfig.BoostEnergy;
+				}
+				Global.setBoostUse(false);
+			}
+		}
+		if (BoostTimeCount == 0) {
+			if (BoostUse < 3 && BoostUse > 0) {
+				vx = 3 + 3;//GameConfig.BoostSpeed; //select.getBoostSpeed();
+				vy = 3 + 3;//GameConfig.BoostSpeed; //select.getBoostSpeed();
+			}
+		}
+		if (BoostUse < 3) {
+			BoostTimeCount++;
+		}
+		if (BoostTimeCount == GameConfig.BoostTime) {
+			BoostUse = GameConfig.BoostMaxUse;
+			vx = 3;
+			vy = 3;
+		}
 		if (Global.getMouseX() < x) {
 			x -= vx;
 		} else {
@@ -113,6 +140,8 @@ public class Player {
 				energy += 2;
 			}
 		}
+		Global.setX(x);
+		Global.setY(y);
 	}
 
 	void draw(GraphicsContext context
@@ -120,6 +149,10 @@ public class Player {
 
 		context.setFill(Color.rgb(255, 0, 0, 1.0));
 		context.fillOval(x, y, GameConfig.radius, GameConfig.radius);
+		context.setFill(Color.hsb(220, 1, 1, 1));
+		context.fillRect(510 - (HP / 20), 20, HP / 20, 20);
+		context.setFill(Color.hsb(100, 1, 1, 1));
+		context.fillRect(510 - (energy / 2), 45, (energy / 2), 5);
 
 	}
 
@@ -140,7 +173,7 @@ public class Player {
 		int h = 100;
 		for (Bullet playerBullet1 : playerBullet) {
 			if (playerBullet1.isDead()) {
-				playerBullet1.setBullet(x, y, vx, vy, num, h, damage /*  * select.getDamageSet()*/, comb, theta, radius, 1);
+				playerBullet1.setBullet(x + (this.radius / 2), y + (this.radius / 2), vx, vy, num, h, damage /*  * select.getDamageSet()*/, comb, theta, radius, 1);
 				System.out.println("make bullet");
 				break;
 			}

@@ -65,7 +65,6 @@ public class Game extends Task {
 			public void handle(long time) {
 
 				gc = pane.getGraphicsContext2D();
-				gc.setFill(Color.rgb(0, 0, 0, 1.0));
 				gc.clearRect(0, 0, GameConfig.WIDTH, GameConfig.HEIGHT);
 				run();
 
@@ -85,7 +84,7 @@ public class Game extends Task {
 		 * enemy test
 		 */
 		Global.setEnemyX(700);
-		Global.setEnemyY(700);
+		Global.setEnemyY(400);
 		playerBullet = new Bullet[PlayerBulletCount];
 		for (int i = 0; i < playerBullet.length; i++) {
 			playerBullet[i] = new Bullet();
@@ -98,6 +97,8 @@ public class Game extends Task {
 	}
 
 	private void bg() {
+		gc.setFill(Color.hsb(0, 0, 0, 1.0));
+		gc.fillRect(0, 0, GameConfig.WIDTH + 100, GameConfig.HEIGHT);
 
 	}
 
@@ -131,8 +132,8 @@ public class Game extends Task {
 				continue;
 			}
 
-			float dx = enemyBullet[i].getX() - getX();
-			float dy = enemyBullet[i].getY() - getY();
+			float dx = enemyBullet[i].getX() - ( getX() + player.getRadius()/2 );
+			float dy = enemyBullet[i].getY() - ( getY() + player.getRadius()/2 );
 			float r = enemyBullet[i].getRadius() + player.getRadius();
 
 			if (dx * dx + dy * dy < r * r) {
@@ -147,8 +148,8 @@ public class Game extends Task {
 				continue;
 			}
 
-			float dx = playerBullet[i].getX() - getEnemyX();
-			float dy = playerBullet[i].getY() - getEnemyY();
+			float dx = playerBullet[i].getX() - ( getEnemyX() +  enemy.getRadius()/2 );
+			float dy = playerBullet[i].getY() - ( getEnemyY() +  enemy.getRadius()/2 );
 			float r = playerBullet[i].getRadius() + enemy.getRadius();
 
 			if (dx * dx + dy * dy < r * r) {
