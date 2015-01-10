@@ -50,16 +50,18 @@ public class Player {
 		return (float) atan2(Global.getEnemyY() - y, Global.getEnemyX() - x);
 	}
 
-	void fire(boolean isFire) {
-		if (isFire == true) {
+	void fire() {
+		//if (isFire == true) {
 			num = Global.getMyBulletNum();
 			System.out.println("bullet num -> " + num);
 			if (num == 1) {
+				Global.setMyBulletFire(false);
 				if (energy >= GameConfig.BeamGunEnergy) {
 					if (BulletTime == 0) {
 						float v = GameConfig.BeamGunSpeed;
 						energy -= GameConfig.BeamGunEnergy;
 						theta = calcTheta(); //(float) atan2(getEnemyY() - y, getEnemyX() - x);
+						Global.setMyBulletFire(true);
 						setBullet(x, y, v, v, num, GameConfig.BeamGunDamage, GameConfig.BeamGunCombNum, theta, 8);
 					}
 					BulletTime++;
@@ -68,11 +70,13 @@ public class Player {
 					}
 				}
 			} else if (num == 2) {
+				Global.setMyBulletFire(false);
 				if (energy >= GameConfig.SniperEnergy) {
 					if (BulletTime == 0) {
 						float v = GameConfig.SniperSpeed;
 						energy -= GameConfig.SniperEnergy;
 						theta = calcTheta(); //(float) atan2(getEnemyY() - y, getEnemyX() - x);
+						Global.setMyBulletFire(true);
 						setBullet(x, y, v, v, num, GameConfig.SniperDamage, GameConfig.SniperCombNum, theta, 15);
 					}
 					BulletTime++;
@@ -81,11 +85,13 @@ public class Player {
 					}
 				}
 			} else if (num == 3) {
+				Global.setMyBulletFire(false);
 				if (energy >= GameConfig.BigBeamEnergy) {
 					if (BulletTime == 0) {
 						float v = GameConfig.BigBeamSpeed;
 						energy -= GameConfig.BigBeamEnergy;
 						theta = calcTheta(); //(float) atan2(getEnemyY() - y, getEnemyX() - x);
+						Global.setMyBulletFire(true);
 						setBullet(x, y, v, v, num, GameConfig.BigBeamDamage, GameConfig.BigBeamCombNum, theta, 90);
 					}
 					BulletTime++;
@@ -94,7 +100,7 @@ public class Player {
 					}
 				}
 			}
-		}
+		//}
 	}
 
 	public void update() {
