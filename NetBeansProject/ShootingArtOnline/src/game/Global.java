@@ -137,7 +137,7 @@ public class Global {
 	 * @param enemyy
 	 */
 	public static void setEnemyY(int enemyy) {
-		System.out.println("enemyY" + enemyy);
+//		System.out.println("enemyY" + enemyy);
 		enemyY = enemyy;
 	}
 

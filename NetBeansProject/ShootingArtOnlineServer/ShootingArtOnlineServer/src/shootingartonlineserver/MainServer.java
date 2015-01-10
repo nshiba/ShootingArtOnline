@@ -121,6 +121,7 @@ public class MainServer extends Thread{
                     String[] zahyou = content.split(",");
                     player.setX(Integer.valueOf(zahyou[0]));
                     player.setY(Integer.valueOf(zahyou[1]));
+                    player.setBulletType(Integer.valueOf(zahyou[2]));
                     System.out.println("受信しました playerNumber" + player.getPlayerNumber() + " : " + remoteAddr +  " : " + content);
                 }
                 playerMap.put(channel,player);
@@ -172,7 +173,7 @@ public class MainServer extends Thread{
                 for(SocketChannel allChannel : channelList){
                     PlayerBean enemy = playerMap.get(allChannel);
                     if(player.getPlayerNumber() != enemy.getPlayerNumber() ){
-                        bufContent = (int)enemy.getX() + "," + (int)enemy.getY();
+                        bufContent = (int)enemy.getX() + "," + (int)enemy.getY() + "," + (int)enemy.getBulletType();
                     }
                 }
 

@@ -7,7 +7,6 @@ package shootingartonline;
 
 import config.GameConfig;
 import game.Game;
-import game.Global;
 import static game.Global.setMouseX;
 import static game.Global.setMouseY;
 import javafx.scene.canvas.Canvas;

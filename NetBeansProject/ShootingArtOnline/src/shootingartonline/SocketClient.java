@@ -1,8 +1,6 @@
 package shootingartonline;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -17,8 +15,6 @@ public abstract class SocketClient extends Thread {
     private Socket socket = null;
 
     public SocketClient(){
-        BufferedReader keyin = new BufferedReader(new InputStreamReader(System.in));
-
         try {
             System.out.println("接続するIPを入力してください");
 //            String host = keyin.readLine();
@@ -52,8 +48,6 @@ public abstract class SocketClient extends Thread {
         byte[] buf = new byte[BUF_SIZE];
         int size;
         try {
-
-            String remoteAddr = socket.getRemoteSocketAddress().toString();
 
             while ((size = socket.getInputStream().read(buf))> 0) {                
                 String strToken = new String(buf, 0, size, "UTF-8");

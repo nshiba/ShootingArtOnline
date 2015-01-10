@@ -1,11 +1,7 @@
 package shootingartonline;
 
+import game.Global;
 import static game.Global.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TestUI implements Runnable {
     private SocketClient socket = null;
@@ -39,26 +35,26 @@ public class TestUI implements Runnable {
                 String[] massages = str.split(",");
                 setEnemyX(Integer.valueOf(massages[0]));
                 setEnemyY(Integer.valueOf(massages[1]));
+                setEnemyBulletNum(Integer.valueOf(massages[2]));
             }
         };
         this.socket.start();
 
 ///////////////////////////////////////////////////////////
 
-        BufferedReader keyin = new BufferedReader(new InputStreamReader(System.in));
         while (true) {                
-            try {
-                String line = keyin.readLine() + "\n";
-                socket.write(line);
-            } catch (IOException ex) {
-                Logger.getLogger(TestUI.class.getName()).log(Level.SEVERE, null, ex);
+            String bullet = "0";
+            if(Global.getMyBulletFire()){
+                bullet = String.valueOf(Global.getMyBulletNum());
             }
-//            socket.write(playerinfoToString(player));
-        }
-    }
+            String line = String.valueOf(Global.getX()) + "," + String.valueOf(Global.getX()) + "," + bullet + "\n";
+            socket.write(line);
 
-    public static String playerinfoToString(PlayerBean player){
-        String str = player.getPlayerNumber() + "," + player.getX() + "," + player.getY() + "," + player.getBulletType() + "," + player.getHp() + "\n";
-        return str;
+//            try {
+//                Thread.sleep(1);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(TestUI.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        }
     }
 }

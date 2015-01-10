@@ -3,9 +3,8 @@ package shootingartonlineserver;
 import java.io.Serializable;
 
 public class PlayerBean implements Serializable{
-    private float x,y = 0;
+    private int x,y = 0;
     private int bulletType = 0;
-    private float hp = 100;
     private int playerNumber = 0;
 
     /**
@@ -18,7 +17,7 @@ public class PlayerBean implements Serializable{
     /**
      * @param x the x to set
      */
-    public void setX(float x) {
+    public void setX(int x) {
         this.x = x;
     }
 
@@ -32,7 +31,7 @@ public class PlayerBean implements Serializable{
     /**
      * @param y the y to set
      */
-    public void setY(float y) {
+    public void setY(int y) {
         this.y = y;
     }
 
@@ -48,20 +47,6 @@ public class PlayerBean implements Serializable{
      */
     public void setBulletType(int bulletType) {
         this.bulletType = bulletType;
-    }
-
-    /**
-     * @return the hp
-     */
-    public float getHp() {
-        return hp;
-    }
-
-    /**
-     * @param hp the hp to set
-     */
-    public void setHp(float hp) {
-        this.hp = hp;
     }
 
     /**
