@@ -22,6 +22,7 @@ public class Global {
 	public static boolean isBoostUse;
 	public static boolean isNPC;
 	public static int enemyBulletNum;
+	public static boolean isMacth;
 
 	/**
 	 * enemy bullet
@@ -231,5 +232,13 @@ public class Global {
 	 */
 	public static boolean getNPC() {
 		return isNPC;
+	}
+
+	public static void setMatch(boolean match){
+		isMacth = match;
+	}
+
+	public static boolean getMatch(){
+		return isMacth;
 	}
 }

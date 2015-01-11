@@ -1,6 +1,7 @@
 package shootingartonline;
 
 
+import com.sun.javaws.ui.ApplicationIconGenerator;
 import static config.GameConfig.*;
 import game.Global;
 import java.io.IOException;
@@ -14,9 +15,12 @@ public class ShootingArtOnline extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-        TestUI client = new TestUI();
-        Thread t = new Thread(client);
-        t.start();
+        SocketInput input = new SocketInput();
+        Thread t1 = new Thread(input);
+        t1.start();
+		SocketOutput output = new SocketOutput();
+		Thread t2 = new Thread(output);
+		t2.start();
 
 		GamePanel pane = new GamePanel();
 		primaryStage.setScene(new Scene(pane));

@@ -96,6 +96,7 @@ public class MainServer extends Thread{
 
             String remoteAddr = channel.socket().getRemoteSocketAddress().toString();
             System.out.println("接続されました : " + remoteAddr);
+			System.out.println("現在の人数は" + playerMap.size() + "人です");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -118,6 +119,12 @@ public class MainServer extends Thread{
                 String bufContent = charset.decode(buf).toString();
                 String[] contents = bufContent.split("\n");
                 for (String content : contents) {
+
+					if(content.equals("macthing")){
+						System.out.println("受信しました playerNumber" + player.getPlayerNumber());
+						continue;
+					}
+
                     String[] zahyou = content.split(",");
                     player.setX(Integer.valueOf(zahyou[0]));
                     player.setY(Integer.valueOf(zahyou[1]));
@@ -169,13 +176,17 @@ public class MainServer extends Thread{
             try {
                 String bufContent = "";
 
-
-                for(SocketChannel allChannel : channelList){
-                    PlayerBean enemy = playerMap.get(allChannel);
-                    if(player.getPlayerNumber() != enemy.getPlayerNumber() ){
-                        bufContent = (int)enemy.getX() + "," + (int)enemy.getY() + "," + (int)enemy.getBulletType();
-                    }
-                }
+				if(channelList.size() < 2){
+					bufContent = "macthing" + "\n";
+				}
+				else{
+                	for(SocketChannel allChannel : channelList){
+                	    PlayerBean enemy = playerMap.get(allChannel);
+                	    if(player.getPlayerNumber() != enemy.getPlayerNumber() ){
+                	        bufContent = (int)enemy.getX() + "," + (int)enemy.getY() + "," + (int)enemy.getBulletType() + "\n";
+                	    }
+                	}
+				}
 
                 buf = charset.encode(CharBuffer.wrap(bufContent));
 
