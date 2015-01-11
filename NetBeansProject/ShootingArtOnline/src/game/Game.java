@@ -98,7 +98,7 @@ public class Game extends Task {
 
 	private void bg() {
 		gc.setFill(Color.hsb(0, 0, 0, 1.0));
-		gc.fillRect(0, 0, GameConfig.WIDTH + 100, GameConfig.HEIGHT);
+		gc.fillRect(0, 0, GameConfig.WIDTH, GameConfig.HEIGHT);
 
 	}
 
