@@ -8,8 +8,6 @@ package game;
 import config.GameConfig;
 import static game.Global.FrameCount;
 import static game.Global.enemyBullet;
-import static game.Global.getMouseX;
-import static game.Global.getMouseY;
 import static game.Global.playerBullet;
 import static java.lang.Math.atan2;
 import javafx.scene.canvas.GraphicsContext;

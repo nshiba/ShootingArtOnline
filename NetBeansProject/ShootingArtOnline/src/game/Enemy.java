@@ -147,10 +147,10 @@ public class Enemy {
 			if (num == 1) {
 				if (energy >= GameConfig.BeamGunEnergy) {
 					//if (BulletTime == 0) {
-						float v = GameConfig.BeamGunSpeed;
-						energy -= GameConfig.BeamGunEnergy / 2;
-						theta = (float) atan2(getY() - y, getX() - x);
-						setBullet(x, y, v, v, num, GameConfig.BeamGunDamage, GameConfig.BeamGunCombNum, theta, 8);
+					float v = GameConfig.BeamGunSpeed;
+					energy -= GameConfig.BeamGunEnergy / 2;
+					theta = (float) atan2(getY() - y, getX() - x);
+					setBullet(x, y, v, v, num, GameConfig.BeamGunDamage, GameConfig.BeamGunCombNum, theta, 8);
 					//}
 					BulletTime++;
 					if (BulletTime >= GameConfig.BeamGunTime) {
@@ -160,10 +160,10 @@ public class Enemy {
 			} else if (num == 2) {
 				if (energy >= GameConfig.SniperEnergy) {
 					//if (BulletTime == 0) {
-						float v = GameConfig.SniperSpeed;
-						energy -= GameConfig.SniperEnergy / 2;
-						theta = (float) atan2(getY() - y, getX() - x);
-						setBullet(x, y, v, v, num, GameConfig.SniperDamage, GameConfig.SniperCombNum, theta, 15);
+					float v = GameConfig.SniperSpeed;
+					energy -= GameConfig.SniperEnergy / 2;
+					theta = (float) atan2(getY() - y, getX() - x);
+					setBullet(x, y, v, v, num, GameConfig.SniperDamage, GameConfig.SniperCombNum, theta, 15);
 					//}
 					BulletTime++;
 					if (BulletTime >= GameConfig.SniperTime) {
@@ -173,10 +173,10 @@ public class Enemy {
 			} else if (num == 3) {
 				if (energy >= GameConfig.BigBeamEnergy) {
 					//if (BulletTime == 0) {
-						float v = GameConfig.BigBeamSpeed;
-						energy -= GameConfig.BigBeamEnergy / 2;
-						theta = (float) atan2(getY() - y, getX() - x);
-						setBullet(x, y, v, v, num, GameConfig.BigBeamDamage, GameConfig.BigBeamCombNum, theta, 90);
+					float v = GameConfig.BigBeamSpeed;
+					energy -= GameConfig.BigBeamEnergy / 2;
+					theta = (float) atan2(getY() - y, getX() - x);
+					setBullet(x, y, v, v, num, GameConfig.BigBeamDamage, GameConfig.BigBeamCombNum, theta, 90);
 					//}
 					BulletTime++;
 					if (BulletTime >= GameConfig.BigBeamTime) {
