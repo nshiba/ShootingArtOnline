@@ -48,6 +48,12 @@ public abstract class SocketClient extends Thread {
 			System.out.println("Connection failed.");
 			return;
 		}
+
+//		送信用スレッド作成
+		SocketOutput output = new SocketOutput(socket);
+		Thread t2 = new Thread(output);
+		t2.start();
+		////////////////////////////////
 		
 		byte[] buf = new byte[BUF_SIZE];
 		int size;
@@ -56,7 +62,7 @@ public abstract class SocketClient extends Thread {
 				String strToken = new String(buf, 0, size, "UTF-8");
 				String[] massages = strToken.split("\n");
 				for (String message : massages) {
-					System.out.println(message);
+					System.out.println(message);	
 					if(message.equals("logout")){
 //						logout();
 						break;
@@ -85,6 +91,7 @@ public abstract class SocketClient extends Thread {
 	private void close(){
 		try {
 			socket.close();
+			return;
 		} catch (IOException ex) {
 			Logger.getLogger(SocketClient.class.getName()).log(Level.SEVERE, null, ex);
 		}

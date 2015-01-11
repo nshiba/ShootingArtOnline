@@ -9,8 +9,8 @@ public class TestGUI {
         SocketInput input = new SocketInput();
         Thread t1 = new Thread(input);
         t1.start();
-		SocketOutput output = new SocketOutput();
-		Thread t2 = new Thread(output);
-		t2.start();
+//		SocketOutput output = new SocketOutput();
+//		Thread t2 = new Thread(output);
+//		t2.start();
 	}
 }
