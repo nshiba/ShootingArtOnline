@@ -6,28 +6,12 @@ import static game.Global.*;
 public class TestUI implements Runnable {
     private SocketClient socket = null;
 
-//    public TestUI(){
-//        System.out.println("コンストラクタ");
-//        this.socket = new SocketClient() {
-//            @Override
-//            protected void onMassage(String str) {
-//                String[] massages = str.split(",");
-//                setEnemyX(Integer.valueOf(massages[0]));
-//                setEnemyY(Integer.valueOf(massages[1]));
-//            }
-//        };
-//        this.socket.start();
-//    }
-
     public static void main(String[] args){
-        System.out.println("kitakitakita");
         new TestUI().run();
     }
 
     @Override
     public void run(){
-        System.out.println("kitakitakita");
-        System.out.println("コンストラクタ");
         this.socket = new SocketClient() {
             @Override
             protected void onMassage(String str) {
