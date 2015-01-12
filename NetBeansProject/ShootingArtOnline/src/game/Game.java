@@ -21,6 +21,7 @@ import javafx.concurrent.Task;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import shootingartonline.SocketInput;
 
 /**
@@ -38,6 +39,7 @@ public class Game extends Task {
 	boolean SelectFlag = false;
 	GraphicsContext gc;
 	Timeline timeline;
+	private final Font font = new Font("Italic", 80);
 
 	public Game(Canvas pane) {
 		this.pane = pane;
@@ -58,12 +60,14 @@ public class Game extends Task {
 		}
 		if (title.getTitleFlag()) {
 			title.draw(gc);
-			if(!title.getTitleFlag()){
-				GameFlag = !GameFlag; 
-				if(title.isVS){
+			if (!title.getTitleFlag()) {
+				GameFlag = !GameFlag;
+				if (title.isVS) {
 					Global.setNPC(true);
-				}else if(title.isCPU){
+					FrameCount = 0;
+				} else if (title.isCPU) {
 					Global.setNPC(false);
+					FrameCount = 0;
 				}
 			}
 		}
@@ -123,58 +127,87 @@ public class Game extends Task {
 	}
 
 	private void Game() {
+		if (title.isVS && !Global.getMatch()) {
+			gc.setFill(Color.hsb(0, 1, 1, 1));
+			gc.setFont(font);
+			gc.fillText("Matching....", GameConfig.WIDTH / 2 - 200, GameConfig.HEIGHT / 2);
+			FrameCount = 0;
+		} else if (title.isCPU && FrameCount <= 60) {
+			gc.setFill(Color.hsb(180, 1, 1, 1));
+			gc.setFont(font);
+			gc.fillText("S A O", GameConfig.WIDTH / 2 - 100, GameConfig.HEIGHT / 2);
 
-		player.update();
-		enemy.update();
-		for (Bullet playerBullet1 : playerBullet) {
-			playerBullet1.update();
-		}
-		for (Bullet enemyBullet1 : enemyBullet) {
-			enemyBullet1.update();
-		}
+		} else if (title.isCPU && FrameCount > 60 && FrameCount <= 90) {
+			gc.setFill(Color.hsb(180, 1, 1, 1));
+			gc.setFont(font);
+			gc.fillText("S A O", GameConfig.WIDTH / 2 - 100, GameConfig.HEIGHT / 2);
+			gc.fillText("start", GameConfig.WIDTH / 2 - 100, GameConfig.HEIGHT / 2 + 80);
 
-		// 自機が弾を撃つ。
-		player.fire();
-		// 敵が弾を撃つ。
-		enemy.fire();
+		} else if (title.isVS && FrameCount <= 60) {
+			gc.setFill(Color.hsb(180, 1, 1, 1));
+			gc.setFont(font);
+			gc.fillText("S A O", GameConfig.WIDTH / 2 - 100, GameConfig.HEIGHT / 2);
 
-		for (Bullet playerBullet1 : playerBullet) {
-			playerBullet1.draw(gc);
-		}
-		for (Bullet enemyBullet1 : enemyBullet) {
-			enemyBullet1.draw(gc);
-		}
-		player.draw(gc);
-		enemy.draw(gc);
+		} else if (title.isVS && FrameCount > 60 && FrameCount <= 90) {
+			gc.setFill(Color.hsb(180, 1, 1, 1));
+			gc.setFont(font);
+			gc.fillText("S A O", GameConfig.WIDTH / 2 - 100, GameConfig.HEIGHT / 2);
+			gc.fillText("start", GameConfig.WIDTH / 2 - 100, GameConfig.HEIGHT / 2 + 80);
 
-		for (int i = 0; i < enemyBullet.length; i++) {
-			if (enemyBullet[i].isDead()) {
-				continue;
+		} else {
+
+			player.update();
+			enemy.update();
+			for (Bullet playerBullet1 : playerBullet) {
+				playerBullet1.update();
+			}
+			for (Bullet enemyBullet1 : enemyBullet) {
+				enemyBullet1.update();
 			}
 
-			float dx = (enemyBullet[i].getX() + enemyBullet[i].getRadius() / 2) - (getX() + player.getRadius() / 2);
-			float dy = (enemyBullet[i].getY() + enemyBullet[i].getRadius() / 2) - (getY() + player.getRadius() / 2);
-			float r = enemyBullet[i].getRadius() / 2 + player.getRadius() / 2;
+			// 自機が弾を撃つ。
+			player.fire();
+			// 敵が弾を撃つ。
+			enemy.fire();
 
-			if (dx * dx + dy * dy < r * r) {
-				player.reduceLife(i);
-				enemyBullet[i].kill();
+			for (Bullet playerBullet1 : playerBullet) {
+				playerBullet1.draw(gc);
 			}
-		}
+			for (Bullet enemyBullet1 : enemyBullet) {
+				enemyBullet1.draw(gc);
+			}
+			player.draw(gc);
+			enemy.draw(gc);
 
-		// 敵と自機の弾との衝突判定。
-		for (int i = 0; i < playerBullet.length; i++) {
-			if (playerBullet[i].isDead()) {
-				continue;
+			for (int i = 0; i < enemyBullet.length; i++) {
+				if (enemyBullet[i].isDead()) {
+					continue;
+				}
+
+				float dx = (enemyBullet[i].getX() + enemyBullet[i].getRadius() / 2) - (getX() + player.getRadius() / 2);
+				float dy = (enemyBullet[i].getY() + enemyBullet[i].getRadius() / 2) - (getY() + player.getRadius() / 2);
+				float r = enemyBullet[i].getRadius() / 2 + player.getRadius() / 2;
+
+				if (dx * dx + dy * dy < r * r) {
+					player.reduceLife(i);
+					enemyBullet[i].kill();
+				}
 			}
 
-			float dx = (playerBullet[i].getX() + playerBullet[i].getRadius() / 2) - (getEnemyX() + enemy.getRadius() / 2);
-			float dy = (playerBullet[i].getY() + playerBullet[i].getRadius() / 2) - (getEnemyY() + enemy.getRadius() / 2);
-			float r = playerBullet[i].getRadius() / 2 + enemy.getRadius() / 2;
+			// 敵と自機の弾との衝突判定。
+			for (int i = 0; i < playerBullet.length; i++) {
+				if (playerBullet[i].isDead()) {
+					continue;
+				}
 
-			if (dx * dx + dy * dy < r * r) {
-				playerBullet[i].kill();
-				enemy.reduceLife(i);
+				float dx = (playerBullet[i].getX() + playerBullet[i].getRadius() / 2) - (getEnemyX() + enemy.getRadius() / 2);
+				float dy = (playerBullet[i].getY() + playerBullet[i].getRadius() / 2) - (getEnemyY() + enemy.getRadius() / 2);
+				float r = playerBullet[i].getRadius() / 2 + enemy.getRadius() / 2;
+
+				if (dx * dx + dy * dy < r * r) {
+					playerBullet[i].kill();
+					enemy.reduceLife(i);
+				}
 			}
 		}
 
