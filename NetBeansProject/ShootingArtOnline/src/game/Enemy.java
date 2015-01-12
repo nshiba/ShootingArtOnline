@@ -144,9 +144,11 @@ public class Enemy {
 				}
 			}
 		} else {
+			num = Global.getEnemyBulletNum();
 			if (num == 1) {
 				if (energy >= GameConfig.BeamGunEnergy) {
 					//if (BulletTime == 0) {
+					System.out.println("num -> 1 BeamGun");
 					float v = GameConfig.BeamGunSpeed;
 					energy -= GameConfig.BeamGunEnergy / 2;
 					theta = (float) atan2(getY() - y, getX() - x);
