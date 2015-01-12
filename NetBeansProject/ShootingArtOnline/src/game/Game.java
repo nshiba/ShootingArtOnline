@@ -33,7 +33,7 @@ public class Game extends Task {
 	Player player;
 	Enemy enemy;
 	Canvas pane;
-	boolean TitleFlag = false;
+	Title title;
 	boolean GameFlag = true;
 	boolean OptionFlag = false;
 	boolean SelectFlag = false;
@@ -47,6 +47,7 @@ public class Game extends Task {
 	}
 
 	public void run() {
+		bg();
 		if (GameFlag) {
 			Game();
 		}
@@ -56,7 +57,10 @@ public class Game extends Task {
 		if (SelectFlag) {
 			//select.draw();
 		}
-
+		if (title.getTitleFlag()) {
+			title.draw(gc);
+		}
+		FrameCount++;
 	}
 
 	public void start(Game game) {
@@ -82,6 +86,7 @@ public class Game extends Task {
 
 		player = new Player(100, 200);
 		enemy = new Enemy(1000, 750);
+		title = new Title();
 		/**
 		 * enemy test
 		 */
@@ -95,11 +100,13 @@ public class Game extends Task {
 		for (int i = 0; i < enemyBullet.length; i++) {
 			enemyBullet[i] = new Bullet();
 		}
+		GameFlag = false;
+		title.setTitleFlag(true);
 		bg();
 
-        SocketInput input = new SocketInput();
-        Thread t1 = new Thread(input);
-        t1.start();
+		SocketInput input = new SocketInput();
+		Thread t1 = new Thread(input);
+		t1.start();
 
 		setNPC(true);
 	}
@@ -111,7 +118,7 @@ public class Game extends Task {
 	}
 
 	private void Game() {
-		bg();
+
 		player.update();
 		enemy.update();
 		for (Bullet playerBullet1 : playerBullet) {
@@ -140,8 +147,8 @@ public class Game extends Task {
 				continue;
 			}
 
-			float dx = enemyBullet[i].getX() - ( getX() + player.getRadius()/2 );
-			float dy = enemyBullet[i].getY() - ( getY() + player.getRadius()/2 );
+			float dx = enemyBullet[i].getX() - (getX() + player.getRadius() / 2);
+			float dy = enemyBullet[i].getY() - (getY() + player.getRadius() / 2);
 			float r = enemyBullet[i].getRadius() + player.getRadius();
 
 			if (dx * dx + dy * dy < r * r) {
@@ -156,8 +163,8 @@ public class Game extends Task {
 				continue;
 			}
 
-			float dx = playerBullet[i].getX() - ( getEnemyX() +  enemy.getRadius()/2 );
-			float dy = playerBullet[i].getY() - ( getEnemyY() +  enemy.getRadius()/2 );
+			float dx = playerBullet[i].getX() - (getEnemyX() + enemy.getRadius() / 2);
+			float dy = playerBullet[i].getY() - (getEnemyY() + enemy.getRadius() / 2);
 			float r = playerBullet[i].getRadius() + enemy.getRadius();
 
 			if (dx * dx + dy * dy < r * r) {
@@ -165,7 +172,7 @@ public class Game extends Task {
 				enemy.reduceLife(i);
 			}
 		}
-		FrameCount++;
+
 	}
 
 	@Override
