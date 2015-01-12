@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class SocketClient extends Thread {
-	private String HOST = "localhost";
 	
 	private static Charset charset = Charset.forName("UTF-8");
 	private Socket socket = null;

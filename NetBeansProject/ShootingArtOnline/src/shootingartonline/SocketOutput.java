@@ -63,7 +63,7 @@ public class SocketOutput implements Runnable{
             	if(getMyBulletFire()){
             	    bullet = String.valueOf(getMyBulletNum());
             	}
-            	line = String.valueOf(getX()) + "," + String.valueOf(getX()) + "," + bullet + "\n";
+            	line = String.valueOf(getX()) + "," + String.valueOf(getY()) + "," + bullet + "\n";
 			}
 
 			//書き込み
