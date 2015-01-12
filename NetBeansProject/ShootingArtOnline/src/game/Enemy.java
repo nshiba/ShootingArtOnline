@@ -52,11 +52,11 @@ public class Enemy {
 
 		if (!Global.getNPC()) {
 			routine();
+			x += vx;
+			y += vy;
 		}
 		x = Global.getEnemyX();
 		y = Global.getEnemyY();
-		x += vx;
-		y += vy;
 		Global.setEnemyX(x);
 		Global.setEnemyY(y);
 
