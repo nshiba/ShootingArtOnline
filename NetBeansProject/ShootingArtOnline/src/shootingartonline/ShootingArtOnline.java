@@ -59,6 +59,9 @@ public class ShootingArtOnline extends Application {
 				Global.setBoostUse(true);
 				}
 			}
+			if(event.getCode() == KeyCode.H){
+				Global.setHardMode(true);
+			}
 
 		});
 		

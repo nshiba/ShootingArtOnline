@@ -24,6 +24,7 @@ public class Global {
 	public static int enemyBulletNum;
 	public static boolean isMacth;
 	public static boolean isMousePressed;
+	public static boolean isHardMode;
 
 	/**
 	 * enemy bullet
@@ -255,5 +256,12 @@ public class Global {
 	 */
 	public static void setMousePressed(boolean aIsMousePressed) {
 		isMousePressed = aIsMousePressed;
+	}
+	
+	public static boolean  getHardMode(){
+		return isHardMode;
+	}
+	public static void setHardMode(boolean b) {
+		isHardMode = b;
 	}
 }
