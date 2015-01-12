@@ -1,7 +1,6 @@
 package shootingartonline;
 
 
-import com.sun.javaws.ui.ApplicationIconGenerator;
 import static config.GameConfig.*;
 import game.Global;
 import java.io.IOException;

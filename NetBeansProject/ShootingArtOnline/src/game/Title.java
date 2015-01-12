@@ -14,8 +14,24 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class Title {
 	
+	private boolean titleFlag;
+	
 	void draw(GraphicsContext context){
 		
+	}
+	/**
+	 * get title flag
+	 * @return 
+	 */
+	public boolean getTitleFlag(){
+		return titleFlag;
+	}
+	/**
+	 * set title flag
+	 * @param b 
+	 */
+	public void setTitleFlag(boolean b){
+		this.titleFlag = b;
 	}
 	
 }
