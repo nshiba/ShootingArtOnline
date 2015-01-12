@@ -6,7 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.Charset;
 
-import static shootingartonline.StaticData.*;
+import static config.ClientConfig.*;
 import static game.Global.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;

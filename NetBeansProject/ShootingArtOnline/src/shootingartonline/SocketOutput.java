@@ -1,15 +1,12 @@
 package shootingartonline;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static game.Global.*;
 import java.io.OutputStream;
-import java.net.InetAddress;
-import static shootingartonline.StaticData.*;
 
 /**
  *
@@ -17,7 +14,6 @@ import static shootingartonline.StaticData.*;
  */
 public class SocketOutput implements Runnable{
 
-	private String HOST = "localhost";
 	private Socket socket = null;
 
 	public SocketOutput(Socket socket){
