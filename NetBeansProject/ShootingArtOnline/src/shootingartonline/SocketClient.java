@@ -42,9 +42,9 @@ public abstract class SocketClient extends Thread {
 		// 接続失敗と判断する。
 		// nullでなければ、接続確立している。
 		if ((inadr = socket.getInetAddress()) != null) {
-			System.out.println("Connect to " + inadr);
+//			System.out.println("Connect to " + inadr);
 		} else {
-			System.out.println("Connection failed.");
+//			System.out.println("Connection failed.");
 			return;
 		}
 
@@ -61,7 +61,7 @@ public abstract class SocketClient extends Thread {
 				String strToken = new String(buf, 0, size, "UTF-8");
 				String[] massages = strToken.split("\n");
 				for (String message : massages) {
-					System.out.println(message);	
+//					System.out.println(message);	
 					if(message.equals("logout")){
 //						logout();
 						break;
@@ -72,13 +72,13 @@ public abstract class SocketClient extends Thread {
 					if(getMatch() == false){
 						setMatch(true);
 					}
-					System.out.println("onMessage");
+//					System.out.println("onMessage");
 					onMassage(message);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("エラーが発生したので終了します");
+//			System.out.println("エラーが発生したので終了します");
 			close();
 		}
 	}

@@ -96,7 +96,7 @@ public class MainServer extends Thread{
 
             String remoteAddr = channel.socket().getRemoteSocketAddress().toString();
             System.out.println("接続されました : " + remoteAddr);
-			System.out.println("現在の人数は" + playerMap.size() + "人です");
+//			System.out.println("現在の人数は" + playerMap.size() + "人です");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,7 +121,7 @@ public class MainServer extends Thread{
                 for (String content : contents) {
 
 					if(content.equals("macthing")){
-						System.out.println("受信しました playerNumber" + player.getPlayerNumber());
+//						System.out.println("受信しました playerNumber" + player.getPlayerNumber());
 						continue;
 					}
 
@@ -129,7 +129,7 @@ public class MainServer extends Thread{
                     player.setX(Integer.valueOf(zahyou[0]));
                     player.setY(Integer.valueOf(zahyou[1]));
                     player.setBulletType(Integer.valueOf(zahyou[2]));
-                    System.out.println("受信しました playerNumber" + player.getPlayerNumber() + " : " + remoteAddr +  " : " + content);
+//                    System.out.println("受信しました playerNumber" + player.getPlayerNumber() + " : " + remoteAddr +  " : " + content);
                 }
                 playerMap.put(channel,player);
 
@@ -168,7 +168,7 @@ public class MainServer extends Thread{
         ByteArrayOutputStream bout = bufferMap.get(channel);
 
         if(bout != null) {
-            System.out.println("書込します");
+//            System.out.println("書込します");
             PlayerBean player = playerMap.get(channel);
             ByteBuffer buf = ByteBuffer.allocate(BUF_SIZE);
             Charset charset = Charset.forName("UTF-8");
@@ -192,7 +192,7 @@ public class MainServer extends Thread{
 
                 int size = channel.write(buf);
 
-                System.out.println("送信サイズ : " + size + "/" + buf.limit());
+//                System.out.println("送信サイズ : " + size + "/" + buf.limit());
 
                 if (buf.hasRemaining()) {
                     //bbufの中を送信しきれなかった場合、残りのBufferMapに書き戻し

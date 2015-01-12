@@ -10,8 +10,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-import static game.Global.*;
-
 public class ShootingArtOnline extends Application {
 
 	@Override
@@ -34,7 +32,7 @@ public class ShootingArtOnline extends Application {
 		 * or true;
 		 */
 		primaryStage.getScene().setOnKeyPressed((KeyEvent event) -> {
-			System.out.println("key pressed -> "+event.getCode());
+//			System.out.println("key pressed -> "+event.getCode());
 			/**
 			 * bullet pressed key a -> 1 s -> 2 d -> 3
 			 */
@@ -56,7 +54,7 @@ public class ShootingArtOnline extends Application {
 			 * use boost  speed up my machine
 			 */
 			if(event.getCode() == KeyCode.X) {
-				System.out.println("X pressed");
+//				System.out.println("X pressed");
 				if(!Global.getBoostUse()){
 				Global.setBoostUse(true);
 				}

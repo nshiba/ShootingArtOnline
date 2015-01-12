@@ -82,14 +82,14 @@ public class Bullet {
 		}
 		if (FrameCount % 50 == 0) {
 			if (orNum == 1) {
-				System.out.println("player bullet reset theta -> "+theta);
+//				System.out.println("player bullet reset theta -> "+theta);
 				theta = (float) atan2(getEnemyY() - y, getEnemyX() - x);
-				System.out.println("player bullet theta -> "+ theta);
+//				System.out.println("player bullet theta -> "+ theta);
 				orNum = 3;
 			} else if (orNum == 0) {
-				System.out.println("enemy bullet reset theta -> "+theta);
+//				System.out.println("enemy bullet reset theta -> "+theta);
 				theta = (float) atan2(Global.getY() - y, Global.getX() - x);
-				System.out.println("enemy bullet theta -> "+ theta);
+//				System.out.println("enemy bullet theta -> "+ theta);
 				orNum = 3;
 			}
 		}

@@ -46,7 +46,7 @@ public class Global {
 	 */
 	public static void setMouseX(double x) {
 		mouseX = (int) x;
-		//System.out.println("setok");
+//		System.out.println("setok");
 	}
 
 	/**

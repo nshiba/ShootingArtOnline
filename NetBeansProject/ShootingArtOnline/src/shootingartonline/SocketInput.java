@@ -1,9 +1,6 @@
 package shootingartonline;
 
-import game.Global;
 import static game.Global.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SocketInput implements Runnable {
     private SocketClient socket = null;
@@ -14,12 +11,12 @@ public class SocketInput implements Runnable {
 
     @Override
     public void run(){
-		System.out.println("run of Input");
+//		System.out.println("run of Input");
 
         this.socket = new SocketClient() {
             @Override
             protected void onMassage(String str) {
-                System.out.println(str);
+//                System.out.println(str);
                 String[] massages = str.split(",");
                 setEnemyX(Integer.valueOf(massages[0]));
                 setEnemyY(Integer.valueOf(massages[1]));

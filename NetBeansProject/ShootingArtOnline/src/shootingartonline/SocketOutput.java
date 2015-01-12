@@ -34,7 +34,7 @@ public class SocketOutput implements Runnable{
 
 	@Override
 	public void run() {
-		System.out.println("run of Output");
+//		System.out.println("run of Output");
 //		// 接続先の情報を入れるInetAddress型のinadrを用意する。
 //		InetAddress inadr;
 //		// inadrにソケットの接続先アドレスを入れ、nullである場合には
@@ -76,7 +76,7 @@ public class SocketOutput implements Runnable{
 				
 			} catch (IOException ex) {
 				Logger.getLogger(SocketOutput.class.getName()).log(Level.SEVERE, null, ex);
-				System.out.println("エラーが発生したので終了します");
+//				System.out.println("エラーが発生したので終了します");
 				try {
 					socket.close();
 				} catch (IOException ex1) {

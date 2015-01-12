@@ -36,7 +36,7 @@ public class GamePanel extends Pane {
 		game.start(game);
 		setMouseEvent();
 		num = 1;
-		System.out.println("game start!!");
+//		System.out.println("game start!!");
 	}
 
 	private void getMouseLocate(MouseEvent event) {

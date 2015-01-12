@@ -51,7 +51,7 @@ public class Player {
 	void fire() {
 		//if (isFire == true) {
 			num = Global.getMyBulletNum();
-			System.out.println("bullet num -> " + num);
+//			System.out.println("bullet num -> " + num);
 			if (num == 1) {
 				Global.setMyBulletFire(false);
 				if (energy >= GameConfig.BeamGunEnergy) {
@@ -178,7 +178,7 @@ public class Player {
 		for (Bullet playerBullet1 : playerBullet) {
 			if (playerBullet1.isDead()) {
 				playerBullet1.setBullet(x + (this.radius / 2), y + (this.radius / 2), vx, vy, num, h, damage /*  * select.getDamageSet()*/, comb, theta, radius, 1);
-				System.out.println("make bullet");
+//				System.out.println("make bullet");
 				break;
 			}
 		}
