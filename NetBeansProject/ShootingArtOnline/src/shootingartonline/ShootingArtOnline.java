@@ -11,16 +11,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import static game.Global.*;
+
 public class ShootingArtOnline extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-        SocketInput input = new SocketInput();
-        Thread t1 = new Thread(input);
-        t1.start();
 //		SocketOutput output = new SocketOutput();
 //		Thread t2 = new Thread(output);
 //		t2.start();
+		
 
 		GamePanel pane = new GamePanel();
 		primaryStage.setScene(new Scene(pane));

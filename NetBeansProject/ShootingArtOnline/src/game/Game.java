@@ -15,12 +15,14 @@ import static game.Global.getEnemyY;
 import static game.Global.getX;
 import static game.Global.getY;
 import static game.Global.playerBullet;
+import static game.Global.setNPC;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import shootingartonline.SocketInput;
 
 /**
  *
@@ -94,6 +96,12 @@ public class Game extends Task {
 			enemyBullet[i] = new Bullet();
 		}
 		bg();
+
+        SocketInput input = new SocketInput();
+        Thread t1 = new Thread(input);
+        t1.start();
+
+		setNPC(true);
 	}
 
 	private void bg() {
