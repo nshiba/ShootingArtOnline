@@ -15,7 +15,6 @@ import static game.Global.getEnemyY;
 import static game.Global.getX;
 import static game.Global.getY;
 import static game.Global.playerBullet;
-import static game.Global.setNPC;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
 import javafx.concurrent.Task;
@@ -59,6 +58,14 @@ public class Game extends Task {
 		}
 		if (title.getTitleFlag()) {
 			title.draw(gc);
+			if(!title.getTitleFlag()){
+				GameFlag = !GameFlag; 
+				if(title.isVS){
+					Global.setNPC(true);
+				}else if(title.isCPU){
+					Global.setNPC(false);
+				}
+			}
 		}
 		FrameCount++;
 	}
@@ -107,8 +114,6 @@ public class Game extends Task {
 		SocketInput input = new SocketInput();
 		Thread t1 = new Thread(input);
 		t1.start();
-
-		setNPC(true);
 	}
 
 	private void bg() {
@@ -132,8 +137,6 @@ public class Game extends Task {
 		player.fire();
 		// 敵が弾を撃つ。
 		enemy.fire();
-		player.draw(gc);
-		enemy.draw(gc);
 
 		for (Bullet playerBullet1 : playerBullet) {
 			playerBullet1.draw(gc);
@@ -141,15 +144,17 @@ public class Game extends Task {
 		for (Bullet enemyBullet1 : enemyBullet) {
 			enemyBullet1.draw(gc);
 		}
+		player.draw(gc);
+		enemy.draw(gc);
 
 		for (int i = 0; i < enemyBullet.length; i++) {
 			if (enemyBullet[i].isDead()) {
 				continue;
 			}
 
-			float dx = enemyBullet[i].getX() - (getX() + player.getRadius() / 2);
-			float dy = enemyBullet[i].getY() - (getY() + player.getRadius() / 2);
-			float r = enemyBullet[i].getRadius() + player.getRadius();
+			float dx = (enemyBullet[i].getX() + enemyBullet[i].getRadius() / 2) - (getX() + player.getRadius() / 2);
+			float dy = (enemyBullet[i].getY() + enemyBullet[i].getRadius() / 2) - (getY() + player.getRadius() / 2);
+			float r = enemyBullet[i].getRadius() / 2 + player.getRadius() / 2;
 
 			if (dx * dx + dy * dy < r * r) {
 				player.reduceLife(i);
@@ -163,9 +168,9 @@ public class Game extends Task {
 				continue;
 			}
 
-			float dx = playerBullet[i].getX() - (getEnemyX() + enemy.getRadius() / 2);
-			float dy = playerBullet[i].getY() - (getEnemyY() + enemy.getRadius() / 2);
-			float r = playerBullet[i].getRadius() + enemy.getRadius();
+			float dx = (playerBullet[i].getX() + playerBullet[i].getRadius() / 2) - (getEnemyX() + enemy.getRadius() / 2);
+			float dy = (playerBullet[i].getY() + playerBullet[i].getRadius() / 2) - (getEnemyY() + enemy.getRadius() / 2);
+			float r = playerBullet[i].getRadius() / 2 + enemy.getRadius() / 2;
 
 			if (dx * dx + dy * dy < r * r) {
 				playerBullet[i].kill();

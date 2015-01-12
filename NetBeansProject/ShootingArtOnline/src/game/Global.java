@@ -23,6 +23,7 @@ public class Global {
 	public static boolean isNPC;
 	public static int enemyBulletNum;
 	public static boolean isMacth;
+	public static boolean isMousePressed;
 
 	/**
 	 * enemy bullet
@@ -240,5 +241,19 @@ public class Global {
 
 	public static boolean getMatch(){
 		return isMacth;
+	}
+
+	/**
+	 * @return the getMousePressed
+	 */
+	public static boolean getMousePressed() {
+		return isMousePressed;
+	}
+
+	/**
+	 * @param aIsMousePressed the isMousePressed to set
+	 */
+	public static void setMousePressed(boolean aIsMousePressed) {
+		isMousePressed = aIsMousePressed;
 	}
 }

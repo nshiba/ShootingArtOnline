@@ -80,19 +80,19 @@ public class Bullet {
 		if (isDead) {
 			return;
 		}
-		if (FrameCount % 50 == 0) {
+		/*if (FrameCount % 50 == 0) {
 			if (orNum == 1) {
 //				System.out.println("player bullet reset theta -> "+theta);
-				theta = (float) atan2(getEnemyY() - y, getEnemyX() - x);
+				theta = (float) atan2(getEnemyY() + GameConfig.radius / 2 - y, getEnemyX() + GameConfig.radius / 2 - x);
 //				System.out.println("player bullet theta -> "+ theta);
 				orNum = 3;
 			} else if (orNum == 0) {
 //				System.out.println("enemy bullet reset theta -> "+theta);
-				theta = (float) atan2(Global.getY() - y, Global.getX() - x);
+				theta = (float) atan2(Global.getY() + GameConfig.radius / 2 - y, Global.getX() + GameConfig.radius / 2 - x);
 //				System.out.println("enemy bullet theta -> "+ theta);
 				orNum = 3;
 			}
-		}
+		}*/
 		this.x += vx * cos(theta);
 		this.y += vy * sin(theta);
 

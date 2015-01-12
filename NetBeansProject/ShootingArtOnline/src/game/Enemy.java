@@ -50,13 +50,15 @@ public class Enemy {
 
 	public void update() {
 
+		x = Global.getEnemyX();
+		y = Global.getEnemyY();
+		
 		if (!Global.getNPC()) {
 			routine();
 			x += vx;
 			y += vy;
 		}
-		x = Global.getEnemyX();
-		y = Global.getEnemyY();
+		
 		Global.setEnemyX(x);
 		Global.setEnemyY(y);
 
@@ -106,7 +108,7 @@ public class Enemy {
 					if (energy >= GameConfig.BeamGunEnergy) {
 						if (BulletTime == 0) {
 							float v = GameConfig.BeamGunSpeed;
-							energy -= GameConfig.BeamGunEnergy / 2;
+							energy -= GameConfig.BeamGunEnergy;
 							theta = (float) atan2(getY() - y, getX() - x);
 							setBullet(x, y, v, v, num, GameConfig.BeamGunDamage, GameConfig.BeamGunCombNum, theta, 8);
 						}
@@ -119,7 +121,7 @@ public class Enemy {
 					if (energy >= GameConfig.SniperEnergy) {
 						if (BulletTime == 0) {
 							float v = GameConfig.SniperSpeed;
-							energy -= GameConfig.SniperEnergy / 2;
+							energy -= GameConfig.SniperEnergy;
 							theta = (float) atan2(getY() - y, getX() - x);
 							setBullet(x, y, v, v, num, GameConfig.SniperDamage, GameConfig.SniperCombNum, theta, 15);
 						}
@@ -132,7 +134,7 @@ public class Enemy {
 					if (energy >= GameConfig.BigBeamEnergy) {
 						if (BulletTime == 0) {
 							float v = GameConfig.BigBeamSpeed;
-							energy -= GameConfig.BigBeamEnergy / 2;
+							energy -= GameConfig.BigBeamEnergy;
 							theta = (float) atan2(getY() - y, getX() - x);
 							setBullet(x, y, v, v, num, GameConfig.BigBeamDamage, GameConfig.BigBeamCombNum, theta, 90);
 						}
@@ -150,7 +152,7 @@ public class Enemy {
 					//if (BulletTime == 0) {
 //					System.out.println("num -> 1 BeamGun");
 					float v = GameConfig.BeamGunSpeed;
-					energy -= GameConfig.BeamGunEnergy / 2;
+					energy -= GameConfig.BeamGunEnergy;
 					theta = (float) atan2(getY() - y, getX() - x);
 					setBullet(x, y, v, v, num, GameConfig.BeamGunDamage, GameConfig.BeamGunCombNum, theta, 8);
 					//}
@@ -163,7 +165,7 @@ public class Enemy {
 				if (energy >= GameConfig.SniperEnergy) {
 					//if (BulletTime == 0) {
 					float v = GameConfig.SniperSpeed;
-					energy -= GameConfig.SniperEnergy / 2;
+					energy -= GameConfig.SniperEnergy;
 					theta = (float) atan2(getY() - y, getX() - x);
 					setBullet(x, y, v, v, num, GameConfig.SniperDamage, GameConfig.SniperCombNum, theta, 15);
 					//}
@@ -176,7 +178,7 @@ public class Enemy {
 				if (energy >= GameConfig.BigBeamEnergy) {
 					//if (BulletTime == 0) {
 					float v = GameConfig.BigBeamSpeed;
-					energy -= GameConfig.BigBeamEnergy / 2;
+					energy -= GameConfig.BigBeamEnergy;
 					theta = (float) atan2(getY() - y, getX() - x);
 					setBullet(x, y, v, v, num, GameConfig.BigBeamDamage, GameConfig.BigBeamCombNum, theta, 90);
 					//}
@@ -231,7 +233,7 @@ public class Enemy {
 		if (dx * dx + dy * dy < 300 * 300) {
 			num = 3;
 		} else if (dx * dx + dy * dy > 800 * 800) {
-			num = 3;
+			num = 2;
 		}
 	}
 }

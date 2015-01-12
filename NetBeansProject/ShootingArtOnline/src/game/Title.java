@@ -22,6 +22,8 @@ public class Title {
 	private final Font titleFontSmall = new Font("Italic", 80);
 	private final Font menuFont = new Font("Italic", 50);
 	private float[] titleLogo;
+	public boolean isVS = false;
+	public boolean isCPU = false;
 
 	public Title() {
 		titleLogo = new float[4];
@@ -172,6 +174,10 @@ public class Title {
 			} else if (Global.FrameCount >= 525) {
 				if (Global.getMouseX() > 820 && Global.getMouseX() < 1200 && Global.getMouseY() > 350 && Global.getMouseY() < 400) {
 					context.setFill(Color.hsb(270, 1, 1, 1));
+					if(Global.getMousePressed()){
+						setIsVS(true);
+						setTitleFlag(false);
+					}
 				} else {
 					context.setFill(Color.hsb(250, 1, 1, 0.75));
 				}
@@ -179,6 +185,10 @@ public class Title {
 				context.fillText("VS MODE", 820, 400);
 				if (Global.getMouseX() > 850 && Global.getMouseX() < 1250 && Global.getMouseY() > 450 && Global.getMouseY() < 500) {
 					context.setFill(Color.hsb(270, 1, 1, 1));
+					if(Global.getMousePressed()){
+						setIsCPU(true);
+						setTitleFlag(false);
+					}
 				} else {
 					context.setFill(Color.hsb(250, 1, 1, 0.75));
 				}
@@ -204,7 +214,36 @@ public class Title {
 	 */
 	public void setTitleFlag(boolean b) {
 		this.titleFlag = b;
+		System.out.println("ok");
 		Global.FrameCount = 0;
+	}
+
+	/**
+	 * @return the isVS
+	 */
+	public boolean isIsVS() {
+		return isVS;
+	}
+
+	/**
+	 * @param isVS the isVS to set
+	 */
+	public void setIsVS(boolean isVS) {
+		this.isVS = isVS;
+	}
+
+	/**
+	 * @return the isCPU
+	 */
+	public boolean isIsCPU() {
+		return isCPU;
+	}
+
+	/**
+	 * @param isCPU the isCPU to set
+	 */
+	public void setIsCPU(boolean isCPU) {
+		this.isCPU = isCPU;
 	}
 
 }
